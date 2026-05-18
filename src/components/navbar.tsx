@@ -4,15 +4,15 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import { Menu, X, CircuitBoard, Download, Shield, Send, Wrench, LayoutDashboard, Home } from "lucide-react";
+import { Menu, X, CircuitBoard, Download, Shield, LayoutDashboard, Home, Images, Layers } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
     { name: "Home", href: "/", icon: Home },
-    { name: "Downloads", href: "/download", icon: Download },
+    { name: "Download", href: "/download", icon: Download },
+    { name: "Gallery", href: "/gallery", icon: Images },
+    { name: "Details", href: "/details", icon: Layers },
     { name: "Devices", href: "/devices", icon: Shield },
-    { name: "Installation", href: "/installation", icon: Wrench },
-    { name: "Community", href: "/community", icon: Send },
     { name: "Admin", href: "/admin", icon: LayoutDashboard },
 ];
 
@@ -52,7 +52,7 @@ export function Navbar() {
                 <div className="hidden items-center gap-1 lg:flex">
                     {navItems.map((item) => {
                         const baseHref = item.href.split("#")[0];
-                        const isActive = pathname === baseHref || (item.name === "Devices" && pathname.startsWith("/devices"));
+                        const isActive = pathname === baseHref || (baseHref !== "/" && pathname.startsWith(baseHref));
                         return (
                             <Link
                                 key={`${item.name}-${item.href}`}
@@ -100,7 +100,7 @@ export function Navbar() {
                 >
                     {navItems.map((item) => {
                         const baseHref = item.href.split("#")[0];
-                        const isActive = pathname === baseHref || (item.name === "Devices" && pathname.startsWith("/devices"));
+                        const isActive = pathname === baseHref || (baseHref !== "/" && pathname.startsWith(baseHref));
                         return (
                             <Link
                                 key={`${item.name}-${item.href}-mobile`}

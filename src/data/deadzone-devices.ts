@@ -5,18 +5,38 @@ export type DeadZoneDevice = {
     brand: string;
     platform: string;
     status: "supported" | "coming_soon";
+    image?: string;
+    bases?: string[];
+    tags?: string[];
 };
 
 const platform = "HyperOS 3 / Global ROM Base / CN features";
+const baseTags = ["Global Base", "China Base", "HyperOS 3", "Fastboot ZIP"];
+
+function withComputedTags<T extends Omit<DeadZoneDevice, "tags" | "bases">>(device: T): DeadZoneDevice {
+    return {
+        ...device,
+        bases: ["Global Base", "China Base"],
+        tags: [
+            ...baseTags,
+            device.soc,
+            device.status === "coming_soon" ? "Coming Soon" : "Stable",
+        ],
+    };
+}
+
+function ensureComputedTags(device: DeadZoneDevice): DeadZoneDevice {
+    return device.tags?.length ? device : withComputedTags(device);
+}
 
 export const mtkDevices: DeadZoneDevice[] = [
-    { codename: "agate", name: "Xiaomi 11T", soc: "MTK", brand: "Xiaomi", platform, status: "supported" },
-    { codename: "aristotle", name: "Xiaomi 13T", soc: "MTK", brand: "Xiaomi", platform, status: "supported" },
-    { codename: "daumier", name: "Xiaomi 12 Pro Dimensity Edition", soc: "MTK", brand: "Xiaomi", platform, status: "supported" },
-    { codename: "pissarro", name: "Redmi Note 11 Pro/Pro+ 5G / Xiaomi 11i 5G", soc: "MTK", brand: "Redmi", platform, status: "coming_soon" },
-    { codename: "plato", name: "Xiaomi 12T", soc: "MTK", brand: "Xiaomi", platform, status: "supported" },
-    { codename: "xaga", name: "Redmi Note 11T Pro/Pro+ / Redmi K50i / POCO X4 GT", soc: "MTK", brand: "Redmi", platform, status: "coming_soon" },
-    { codename: "zircon", name: "Redmi Note 13 Pro+ 5G", soc: "MTK", brand: "Redmi", platform, status: "supported" },
+    withComputedTags({ codename: "agate", name: "Xiaomi 11T", soc: "MTK", brand: "Xiaomi", platform, status: "supported" }),
+    withComputedTags({ codename: "aristotle", name: "Xiaomi 13T", soc: "MTK", brand: "Xiaomi", platform, status: "supported" }),
+    withComputedTags({ codename: "daumier", name: "Xiaomi 12 Pro Dimensity Edition", soc: "MTK", brand: "Xiaomi", platform, status: "supported" }),
+    withComputedTags({ codename: "pissarro", name: "Redmi Note 11 Pro/Pro+ 5G / Xiaomi 11i 5G", soc: "MTK", brand: "Redmi", platform, status: "coming_soon" }),
+    withComputedTags({ codename: "plato", name: "Xiaomi 12T", soc: "MTK", brand: "Xiaomi", platform, status: "supported" }),
+    withComputedTags({ codename: "xaga", name: "Redmi Note 11T Pro/Pro+ / Redmi K50i / POCO X4 GT", soc: "MTK", brand: "Redmi", platform, status: "coming_soon" }),
+    withComputedTags({ codename: "zircon", name: "Redmi Note 13 Pro+ 5G", soc: "MTK", brand: "Redmi", platform, status: "supported" }),
 ];
 
 export const snapdragonDevices: DeadZoneDevice[] = [
@@ -89,7 +109,7 @@ export const snapdragonDevices: DeadZoneDevice[] = [
     { codename: "zorn", name: "Redmi K80 / POCO F7 Pro", soc: "Snapdragon", brand: "Redmi", platform, status: "supported" },
 ];
 
-export const allDevices = [...mtkDevices, ...snapdragonDevices].sort((a, b) => a.codename.localeCompare(b.codename));
+export const allDevices = [...mtkDevices, ...snapdragonDevices].map(ensureComputedTags).sort((a, b) => a.codename.localeCompare(b.codename));
 
 export function findDeadZoneDevice(codename: string) {
     return allDevices.find((device) => device.codename === codename);

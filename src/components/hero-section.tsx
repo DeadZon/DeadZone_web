@@ -48,7 +48,7 @@ export function HeroSection() {
                         transition={{ delay: 0.08, duration: 0.7 }}
                         className="max-w-5xl text-5xl font-black leading-[0.9] tracking-tight text-white sm:text-6xl lg:text-8xl"
                     >
-                        DeadZone <span className="text-gradient">HyperOS 3</span> Engineering.
+                        DeadZone <span className="text-gradient">HyperOS</span> Engineering.
                     </motion.h1>
 
                     <motion.p
@@ -57,7 +57,7 @@ export function HeroSection() {
                         transition={{ delay: 0.16, duration: 0.7 }}
                         className="mt-7 max-w-2xl text-base leading-8 text-zinc-300 sm:text-lg"
                     >
-                        Premium custom ROM builds based on HyperOS 3, Global ROM base workflows, and CN feature integration. Built for serious Snapdragon and MTK release engineering.
+                        Premium custom ROM based on HyperOS, focused on smoothness, gaming, stability, and CN feature integration.
                     </motion.p>
 
                     <div className="mt-7 flex flex-wrap gap-3">
@@ -76,7 +76,7 @@ export function HeroSection() {
                             Download ROMs
                         </PremiumButton>
                         <PremiumButton variant="secondary" onClick={() => router.push("/devices")} icon={<Smartphone className="h-5 w-5" />}>
-                            View Devices
+                            View Supported Devices
                         </PremiumButton>
                         <PremiumButton variant="secondary" onClick={() => router.push("/community")} icon={<Send className="h-5 w-5" />}>
                             Join Telegram

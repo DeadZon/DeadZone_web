@@ -18,7 +18,7 @@ export function Footer() {
                             </div>
                         </Link>
                         <p className="max-w-md text-sm leading-7 text-zinc-400">
-                            Premium Android ROM builds for Snapdragon and MTK devices, with release metadata, changelogs, checksums, and install guidance managed through the DeadZone dashboard.
+                            DeadZone HyperOS Engineering builds a premium ROM experience for Snapdragon and MTK devices, with real release metadata, changelogs, checksums, and install guidance.
                         </p>
                         <div className="mt-6 flex gap-3">
                             <Link href="https://github.com/DeadZon/DeadZone_web" className="flex h-10 w-10 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] text-zinc-400 transition-colors hover:border-cyan-300/30 hover:text-white">
@@ -31,21 +31,21 @@ export function Footer() {
                     </div>
 
                     <div>
-                        <h4 className="mb-4 text-sm font-black uppercase tracking-[0.18em] text-white">ROM</h4>
+                        <h4 className="mb-4 text-sm font-black uppercase tracking-[0.18em] text-white">DeadZone</h4>
                         <ul className="space-y-3 text-sm">
                             <li><Link href="/download" className="text-zinc-400 transition-colors hover:text-white">Downloads</Link></li>
+                            <li><Link href="/gallery" className="text-zinc-400 transition-colors hover:text-white">Gallery</Link></li>
+                            <li><Link href="/details" className="text-zinc-400 transition-colors hover:text-white">Details</Link></li>
                             <li><Link href="/devices" className="text-zinc-400 transition-colors hover:text-white">Devices</Link></li>
-                            <li><Link href="/installation" className="text-zinc-400 transition-colors hover:text-white">Installation</Link></li>
-                            <li><Link href="/features" className="text-zinc-400 transition-colors hover:text-white">Features</Link></li>
                         </ul>
                     </div>
 
                     <div>
-                        <h4 className="mb-4 text-sm font-black uppercase tracking-[0.18em] text-white">Project</h4>
+                        <h4 className="mb-4 text-sm font-black uppercase tracking-[0.18em] text-white">Community</h4>
                         <ul className="space-y-3 text-sm">
                             <li><Link href="/community" className="text-zinc-400 transition-colors hover:text-white">Community</Link></li>
-                            <li><Link href="/team" className="text-zinc-400 transition-colors hover:text-white">Team</Link></li>
-                            <li><Link href="/contact" className="text-zinc-400 transition-colors hover:text-white">Contact</Link></li>
+                            <li><Link href="https://github.com/DeadZon/DeadZone_web" className="text-zinc-400 transition-colors hover:text-white">GitHub</Link></li>
+                            <li><Link href="/community" className="text-zinc-400 transition-colors hover:text-white">Telegram</Link></li>
                             <li><Link href="/admin" className="text-zinc-400 transition-colors hover:text-white">Admin</Link></li>
                         </ul>
                     </div>

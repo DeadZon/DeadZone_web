@@ -29,6 +29,12 @@ const flavors = [
     { name: "DeadZone Legend", accent: "gold" as const, icon: Trophy, desc: "Premium gold channel for flagship presentation and exclusive release polish." },
 ];
 
+const mainFeatures = [
+    { title: "System Optimized", icon: Zap, accent: "cyan" as const, desc: "UI responsiveness, performance tuning, battery behavior, and daily-driver smoothness are treated as first-class engineering targets." },
+    { title: "Gaming Focused", icon: Gamepad2, accent: "magenta" as const, desc: "Performance profiles, frame-rate unlock-ready workflows, and lower-latency interaction tuning for devices that can handle it." },
+    { title: "Fully Secure", icon: Lock, accent: "blue" as const, desc: "Privacy-minded defaults, stability checks, clear flashing notes, and careful integrity language without promising unsupported banking bypasses." },
+];
+
 const core = [
     { label: "Performance", icon: Zap, accent: "cyan" as const },
     { label: "Stability", icon: Shield, accent: "blue" as const },
@@ -46,6 +52,36 @@ export default function Home() {
             <Starfield />
             <Navbar />
             <HeroSection />
+
+            <section className="px-6 py-14">
+                <div className="mx-auto max-w-7xl">
+                    <SectionHeader
+                        eyebrow="DeadZone Core"
+                        title="Refine your HyperOS experience."
+                        description="A polished ROM-site path rebuilt for DeadZone's cyberpunk engineering identity and real device matrix."
+                        align="center"
+                    />
+                    <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
+                        {mainFeatures.map((feature, index) => (
+                            <motion.div
+                                key={feature.title}
+                                initial={{ opacity: 0, y: 18 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.06 }}
+                            >
+                                <GlassCard accent={feature.accent} className="h-full p-6 md:p-7">
+                                    <div className="mb-7 flex h-14 w-14 items-center justify-center rounded-2xl border border-current/25 bg-white/[0.05]">
+                                        <feature.icon className="h-7 w-7" />
+                                    </div>
+                                    <h3 className="text-2xl font-black text-white">{feature.title}</h3>
+                                    <p className="mt-4 text-sm leading-7 text-zinc-400">{feature.desc}</p>
+                                </GlassCard>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
 
             <section className="px-6 py-14">
                 <div className="mx-auto max-w-7xl">
