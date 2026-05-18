@@ -10,7 +10,7 @@ interface PremiumButtonProps {
     className?: string;
     icon?: React.ReactNode;
     loading?: boolean;
-    variant?: "primary" | "secondary";
+    variant?: "primary" | "secondary" | "legend" | "danger";
 }
 
 export function PremiumButton({ children, onClick, className, icon, loading, variant = "primary" }: PremiumButtonProps) {
@@ -58,8 +58,12 @@ export function PremiumButton({ children, onClick, className, icon, loading, var
                 className={cn(
                     "group relative overflow-hidden px-8 py-4 rounded-2xl font-black text-sm uppercase tracking-tight transition-all duration-300",
                     variant === "primary"
-                        ? "bg-gradient-to-r from-red-700 via-red-600 to-rose-500 text-white shadow-xl shadow-red-600/20 hover:shadow-red-500/40"
-                        : "bg-white/[0.06] text-white border border-white/10 hover:bg-white/[0.1] hover:border-red-400/35",
+                        ? "bg-gradient-to-r from-cyan-400 via-blue-500 to-fuchsia-500 text-white shadow-xl shadow-cyan-500/20 hover:shadow-cyan-400/40"
+                        : variant === "legend"
+                            ? "bg-gradient-to-r from-amber-300 via-yellow-500 to-orange-500 text-black shadow-xl shadow-amber-500/20 hover:shadow-amber-400/40"
+                            : variant === "danger"
+                                ? "bg-red-600 text-white shadow-xl shadow-red-600/20 hover:bg-red-500"
+                                : "bg-white/[0.06] text-white border border-white/10 hover:bg-white/[0.1] hover:border-cyan-300/35",
                     "hover:brightness-110 active:brightness-90 disabled:opacity-60",
                     className
                 )}

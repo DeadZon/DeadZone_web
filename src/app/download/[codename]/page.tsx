@@ -17,7 +17,6 @@ import {
     Github,
     Link as LinkIcon,
     Fingerprint,
-    Wrench,
     AlertTriangle,
 } from "lucide-react";
 import React, { useState, useEffect } from "react";
@@ -25,6 +24,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { PremiumButton } from "@/components/ui/premium-button";
 import { GlassCard, RomBadge, StatusBadge } from "@/components/ui/deadzone";
+import { findDeadZoneDevice } from "@/data/deadzone-devices";
 
 function platformLabel(device: any, rom?: any) {
     const text = `${rom?.platform || ""} ${rom?.soc || ""} ${device?.chipset || ""}`.toLowerCase();
@@ -58,9 +58,30 @@ export default function DeviceDetailPage({ params }: { params: { codename: strin
                     if (data.roms && data.roms.length > 0) {
                         setSelectedRom(data.roms[0]);
                     }
+                } else {
+                    const fallback = findDeadZoneDevice(params.codename);
+                    if (fallback) {
+                        setDevice({
+                            ...fallback,
+                            id: fallback.codename,
+                            chipset: fallback.soc,
+                            roms: [],
+                            fromFallback: true,
+                        });
+                    }
                 }
             } catch (error) {
                 console.error("Device fetch failed:", error);
+                const fallback = findDeadZoneDevice(params.codename);
+                if (fallback) {
+                    setDevice({
+                        ...fallback,
+                        id: fallback.codename,
+                        chipset: fallback.soc,
+                        roms: [],
+                        fromFallback: true,
+                    });
+                }
             } finally {
                 setLoading(false);
             }
@@ -107,7 +128,7 @@ export default function DeviceDetailPage({ params }: { params: { codename: strin
                 <Starfield />
                 <h1 className="mb-4 text-4xl font-black text-white">Device Not Found</h1>
                 <p className="mb-8 text-zinc-500">The requested device could not be located in the DeadZone database.</p>
-                <Link href="/download" className="rounded-2xl bg-red-600 px-8 py-4 font-bold text-white">
+                <Link href="/download" className="rounded-2xl bg-cyan-400 px-8 py-4 font-bold text-slate-950">
                     Back to Download Center
                 </Link>
             </main>
@@ -128,9 +149,9 @@ export default function DeviceDetailPage({ params }: { params: { codename: strin
                 <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
                     <div className="space-y-6 lg:col-span-1">
                         <motion.div initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }}>
-                            <GlassCard className="p-7">
-                                <div className="mb-7 flex h-20 w-20 items-center justify-center rounded-[1.75rem] border border-red-400/20 bg-red-500/10">
-                                    <Smartphone className="h-10 w-10 text-red-200" />
+                            <GlassCard accent={device.soc === "MTK" ? "purple" : "blue"} className="p-7">
+                                <div className="mb-7 flex h-20 w-20 items-center justify-center rounded-[1.75rem] border border-current/25 bg-white/[0.05]">
+                                    <Smartphone className="h-10 w-10" />
                                 </div>
                                 <h1 className="text-4xl font-black leading-tight text-white">{device.name}</h1>
                                 <p className="mt-2 font-mono text-xs uppercase tracking-[0.24em] text-zinc-500">{device.codename}</p>
@@ -139,12 +160,12 @@ export default function DeviceDetailPage({ params }: { params: { codename: strin
                                     <InfoRow label="Brand" value={device.brand} />
                                     <InfoRow label="Chipset" value={device.chipset} />
                                     <InfoRow label="Platform" value={platformLabel(device, selectedRom)} />
-                                    <InfoRow label="Builds" value={device.roms.length} />
+                                    <InfoRow label="Builds" value={device.roms?.length || 0} />
                                 </div>
                             </GlassCard>
                         </motion.div>
 
-                        <GlassCard className="p-6">
+                        <GlassCard accent="cyan" className="p-6">
                             <h3 className="mb-3 flex items-center gap-2 font-black text-white">
                                 <ShieldCheck className="h-5 w-5 text-emerald-300" /> Device Support
                             </h3>
@@ -155,7 +176,7 @@ export default function DeviceDetailPage({ params }: { params: { codename: strin
                     </div>
 
                     <div className="space-y-7 lg:col-span-2">
-                        {device.roms.length > 0 ? (
+                        {(device.roms?.length || 0) > 0 ? (
                             <>
                                 <div className="flex gap-3 overflow-x-auto pb-2 custom-scrollbar">
                                     {device.roms.map((rom: any) => (
@@ -165,7 +186,7 @@ export default function DeviceDetailPage({ params }: { params: { codename: strin
                                             className={cn(
                                                 "min-h-14 shrink-0 rounded-2xl border px-5 text-left transition-all",
                                                 selectedRom?.id === rom.id
-                                                    ? "border-red-400/40 bg-red-500/15 text-white"
+                                                    ? "border-cyan-300/40 bg-cyan-400/15 text-white"
                                                     : "border-white/10 bg-white/[0.04] text-zinc-400 hover:text-white"
                                             )}
                                         >
@@ -184,7 +205,7 @@ export default function DeviceDetailPage({ params }: { params: { codename: strin
                                             exit={{ opacity: 0, y: -10 }}
                                             className="space-y-7"
                                         >
-                                            <GlassCard className="p-6 md:p-8">
+                                            <GlassCard accent="cyan" className="p-6 md:p-8">
                                                 <div className="mb-8 flex flex-col gap-6 xl:flex-row xl:items-start xl:justify-between">
                                                     <div>
                                                         <div className="mb-4 flex flex-wrap gap-2">
@@ -203,7 +224,7 @@ export default function DeviceDetailPage({ params }: { params: { codename: strin
                                                 <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
                                                     <div>
                                                         <h4 className="mb-4 flex items-center gap-2 font-black text-white">
-                                                            <History className="h-5 w-5 text-red-300" /> Changelog
+                                                            <History className="h-5 w-5 text-cyan-300" /> Changelog
                                                         </h4>
                                                         <div className="min-h-[220px] rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-sm leading-7 text-zinc-300 whitespace-pre-line">
                                                             {selectedRom.changelog || "No changelog provided for this release."}
@@ -211,7 +232,7 @@ export default function DeviceDetailPage({ params }: { params: { codename: strin
                                                     </div>
                                                     <div>
                                                         <h4 className="mb-4 flex items-center gap-2 font-black text-white">
-                                                            <Terminal className="h-5 w-5 text-red-300" /> Build Information
+                                                            <Terminal className="h-5 w-5 text-cyan-300" /> Build Information
                                                         </h4>
                                                         <div className="space-y-3">
                                                             <InfoRow label="Android" value={selectedRom.androidVersion} />
@@ -224,19 +245,19 @@ export default function DeviceDetailPage({ params }: { params: { codename: strin
                                                 </div>
                                             </GlassCard>
 
-                                            <GlassCard className="p-6 md:p-8">
+                                            <GlassCard accent="blue" className="p-6 md:p-8">
                                                 <h3 className="mb-6 flex items-center gap-3 text-2xl font-black text-white">
-                                                    <LinkIcon className="h-6 w-6 text-red-300" /> Release Links
+                                                    <LinkIcon className="h-6 w-6 text-cyan-300" /> Release Links
                                                 </h3>
                                                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                                                    <a href={selectedRom.pixeldrainUrl || selectedRom.downloadUrl} target="_blank" rel="noopener noreferrer" className="rounded-2xl border border-white/10 bg-white/[0.04] p-5 transition-colors hover:border-red-400/35">
-                                                        <Download className="mb-4 h-6 w-6 text-red-300" />
+                                                    <a href={selectedRom.pixeldrainUrl || selectedRom.downloadUrl} target="_blank" rel="noopener noreferrer" className="rounded-2xl border border-white/10 bg-white/[0.04] p-5 transition-colors hover:border-cyan-300/35">
+                                                        <Download className="mb-4 h-6 w-6 text-cyan-300" />
                                                         <p className="text-xs font-black uppercase tracking-[0.18em] text-zinc-500">PixelDrain / Mirror</p>
                                                         <p className="mt-2 break-all text-sm font-bold text-white">{selectedRom.pixeldrainUrl || selectedRom.downloadUrl}</p>
                                                     </a>
                                                     {selectedRom.githubRunUrl && (
-                                                        <a href={selectedRom.githubRunUrl} target="_blank" rel="noopener noreferrer" className="rounded-2xl border border-white/10 bg-white/[0.04] p-5 transition-colors hover:border-red-400/35">
-                                                            <Github className="mb-4 h-6 w-6 text-red-300" />
+                                                        <a href={selectedRom.githubRunUrl} target="_blank" rel="noopener noreferrer" className="rounded-2xl border border-white/10 bg-white/[0.04] p-5 transition-colors hover:border-cyan-300/35">
+                                                            <Github className="mb-4 h-6 w-6 text-cyan-300" />
                                                             <p className="text-xs font-black uppercase tracking-[0.18em] text-zinc-500">GitHub Run</p>
                                                             <p className="mt-2 break-all text-sm font-bold text-white">{selectedRom.githubRunUrl}</p>
                                                         </a>
@@ -245,16 +266,16 @@ export default function DeviceDetailPage({ params }: { params: { codename: strin
                                                 {selectedRom.sha256 && (
                                                     <div className="mt-4 rounded-2xl border border-white/10 bg-black/35 p-5">
                                                         <div className="mb-2 flex items-center gap-2 text-xs font-black uppercase tracking-[0.18em] text-zinc-500">
-                                                            <Fingerprint className="h-4 w-4 text-red-300" /> SHA-256
+                                                            <Fingerprint className="h-4 w-4 text-cyan-300" /> SHA-256
                                                         </div>
                                                         <p className="break-all font-mono text-xs leading-6 text-zinc-300">{selectedRom.sha256}</p>
                                                     </div>
                                                 )}
                                             </GlassCard>
 
-                                            <GlassCard className="p-6 md:p-8">
+                                            <GlassCard accent="purple" className="p-6 md:p-8">
                                                 <h3 className="mb-6 flex items-center gap-3 text-2xl font-black text-white">
-                                                    <Info className="h-6 w-6 text-red-300" /> Installation Guide
+                                                    <Info className="h-6 w-6 text-cyan-300" /> Installation Guide
                                                 </h3>
                                                 <div className="text-sm leading-8 text-zinc-300 whitespace-pre-line">
                                                     {selectedRom.installationGuide || (
@@ -275,9 +296,10 @@ export default function DeviceDetailPage({ params }: { params: { codename: strin
                                 </AnimatePresence>
                             </>
                         ) : (
-                            <GlassCard className="p-12 text-center">
-                                <h3 className="text-xl font-black text-white">No Builds Registered</h3>
-                                <p className="mt-2 text-zinc-500">Official builds for this hardware are coming soon.</p>
+                            <GlassCard accent={device.soc === "MTK" ? "purple" : "blue"} className="p-12 text-center">
+                                <RomBadge accent="slate">Coming Soon</RomBadge>
+                                <h3 className="mt-5 text-xl font-black text-white">No Builds Registered</h3>
+                                <p className="mt-2 text-zinc-500">DeadZone builds for this hardware are not published yet. No fake download links are shown.</p>
                             </GlassCard>
                         )}
                     </div>

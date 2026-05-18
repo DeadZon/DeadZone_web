@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" suppressHydrationWarning>
-            <body className={`${inter.variable} ${spaceGrotesk.variable} antialiased selection:bg-red-500/30`}>
+            <body className={`${inter.variable} ${spaceGrotesk.variable} antialiased selection:bg-cyan-400/30`}>
                 <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
                     <SplashLoader>
                         <VisitorTracker />

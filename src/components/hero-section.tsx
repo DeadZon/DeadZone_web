@@ -2,13 +2,14 @@
 
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Cpu, Download, Flame, Send, ShieldCheck, Smartphone } from "lucide-react";
+import { ArrowRight, Cpu, Download, RadioTower, Send, ShieldCheck, Smartphone, Sparkles } from "lucide-react";
 import { PremiumButton } from "./ui/premium-button";
 import { useRouter } from "next/navigation";
-import { GlassCard, RomBadge } from "./ui/deadzone";
+import { GlassCard, PlatformPill, RomBadge } from "./ui/deadzone";
+import { mtkDevices, snapdragonDevices } from "@/data/deadzone-devices";
 
 export function HeroSection() {
-    const [heroAlert, setHeroAlert] = useState("DeadZone release channel online");
+    const [heroAlert, setHeroAlert] = useState("Coming Soon / Premium Custom ROM");
     const router = useRouter();
 
     useEffect(() => {
@@ -26,27 +27,28 @@ export function HeroSection() {
 
     return (
         <section className="relative overflow-hidden px-6 pb-16 pt-32 sm:pt-36 lg:pb-24">
-            <div className="deadzone-grid pointer-events-none absolute inset-x-0 top-0 h-[680px] opacity-40" />
-            <div className="pointer-events-none absolute left-1/2 top-24 h-[360px] w-[360px] -translate-x-1/2 rounded-full bg-red-600/20 blur-[120px] md:h-[520px] md:w-[520px]" />
+            <div className="deadzone-grid pointer-events-none absolute inset-x-0 top-0 h-[760px] opacity-60" />
+            <div className="pointer-events-none absolute left-1/2 top-20 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-cyan-400/15 blur-[120px] md:h-[620px] md:w-[620px]" />
+            <div className="pointer-events-none absolute right-0 top-40 h-[300px] w-[300px] rounded-full bg-fuchsia-500/15 blur-[110px]" />
 
-            <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[1.04fr_0.96fr]">
+            <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
                 <div>
                     <motion.div
                         initial={{ opacity: 0, y: 12 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="mb-7 inline-flex items-center gap-3 rounded-full border border-red-400/20 bg-red-500/10 px-4 py-2 backdrop-blur-xl"
+                        className="mb-7 inline-flex items-center gap-3 rounded-full border border-cyan-300/25 bg-cyan-400/10 px-4 py-2 backdrop-blur-xl"
                     >
-                        <span className="h-2 w-2 rounded-full bg-red-400 shadow-[0_0_18px_rgba(248,113,113,0.9)]" />
-                        <span className="text-[11px] font-black uppercase tracking-[0.2em] text-red-100">{heroAlert}</span>
+                        <span className="h-2 w-2 rounded-full bg-cyan-300 shadow-[0_0_18px_rgba(103,232,249,0.95)]" />
+                        <span className="text-[11px] font-black uppercase tracking-[0.22em] text-cyan-100">{heroAlert}</span>
                     </motion.div>
 
                     <motion.h1
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.08, duration: 0.7 }}
-                        className="max-w-4xl text-5xl font-black leading-[0.95] tracking-tight text-white sm:text-6xl lg:text-8xl"
+                        className="max-w-5xl text-5xl font-black leading-[0.9] tracking-tight text-white sm:text-6xl lg:text-8xl"
                     >
-                        DeadZone ROM for serious Android performance.
+                        DeadZone <span className="text-gradient">HyperOS 3</span> Engineering.
                     </motion.h1>
 
                     <motion.p
@@ -55,8 +57,14 @@ export function HeroSection() {
                         transition={{ delay: 0.16, duration: 0.7 }}
                         className="mt-7 max-w-2xl text-base leading-8 text-zinc-300 sm:text-lg"
                     >
-                        A cinematic, gaming-ready ROM foundation for Snapdragon and MTK devices. Clean builds, clear metadata, verified downloads, and a dashboard built for real release operations.
+                        Premium custom ROM builds based on HyperOS 3, Global ROM base workflows, and CN feature integration. Built for serious Snapdragon and MTK release engineering.
                     </motion.p>
+
+                    <div className="mt-7 flex flex-wrap gap-3">
+                        <RomBadge accent="cyan">Based on HyperOS 3</RomBadge>
+                        <RomBadge accent="blue">Global ROM Base</RomBadge>
+                        <RomBadge accent="magenta">CN Features Integration</RomBadge>
+                    </div>
 
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -67,20 +75,13 @@ export function HeroSection() {
                         <PremiumButton onClick={() => router.push("/download")} icon={<Download className="h-5 w-5" />}>
                             Download ROMs
                         </PremiumButton>
-                        <PremiumButton variant="secondary" onClick={() => router.push("/download")} icon={<Smartphone className="h-5 w-5" />}>
-                            View Supported Devices
+                        <PremiumButton variant="secondary" onClick={() => router.push("/devices")} icon={<Smartphone className="h-5 w-5" />}>
+                            View Devices
                         </PremiumButton>
                         <PremiumButton variant="secondary" onClick={() => router.push("/community")} icon={<Send className="h-5 w-5" />}>
                             Join Telegram
                         </PremiumButton>
                     </motion.div>
-
-                    <div className="mt-8 flex flex-wrap gap-3">
-                        <RomBadge>DeadZone Base</RomBadge>
-                        <RomBadge>Gaming</RomBadge>
-                        <RomBadge>EPiC</RomBadge>
-                        <RomBadge>Legend</RomBadge>
-                    </div>
                 </div>
 
                 <motion.div
@@ -89,42 +90,33 @@ export function HeroSection() {
                     transition={{ delay: 0.18, duration: 0.8 }}
                     className="relative"
                 >
-                    <GlassCard className="p-5 sm:p-6">
-                        <div className="rounded-[1.5rem] border border-white/10 bg-black/50 p-5">
+                    <GlassCard accent="cyan" className="p-5 sm:p-6">
+                        <div className="rounded-[1.5rem] border border-white/10 bg-black/45 p-5">
                             <div className="mb-6 flex items-center justify-between gap-4">
-                                <div className="flex items-center gap-3">
-                                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-red-500/10">
-                                        <Flame className="h-6 w-6 text-red-300" />
-                                    </div>
-                                    <div>
-                                        <p className="text-sm font-black uppercase tracking-[0.18em] text-white">DeadZone Control</p>
-                                        <p className="text-xs text-zinc-500">Release pipeline preview</p>
-                                    </div>
+                                <div>
+                                    <p className="text-sm font-black uppercase tracking-[0.22em] text-white">Engineering HUD</p>
+                                    <p className="text-xs text-zinc-500">DeadZone device matrix</p>
                                 </div>
-                                <span className="rounded-full border border-emerald-400/20 bg-emerald-500/10 px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em] text-emerald-200">
-                                    Stable
-                                </span>
+                                <RomBadge accent="gold">Legend Ready</RomBadge>
                             </div>
 
-                            <div className="space-y-3">
-                                {[
-                                    { icon: Cpu, label: "Platform", value: "Snapdragon / MTK" },
-                                    { icon: ShieldCheck, label: "Integrity", value: "SHA-256 checksums" },
-                                    { icon: ArrowRight, label: "Flow", value: "Actions -> Release -> Install" },
-                                ].map((item) => (
-                                    <div key={item.label} className="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-4">
-                                        <div className="flex items-center gap-3">
-                                            <item.icon className="h-5 w-5 text-red-300" />
-                                            <span className="text-xs font-black uppercase tracking-[0.16em] text-zinc-500">{item.label}</span>
-                                        </div>
-                                        <span className="text-right text-sm font-bold text-white">{item.value}</span>
-                                    </div>
-                                ))}
+                            <div className="grid grid-cols-2 gap-3">
+                                <div className="rounded-2xl border border-purple-300/25 bg-purple-500/10 p-4">
+                                    <RadioTower className="mb-4 h-6 w-6 text-purple-200" />
+                                    <p className="text-3xl font-black text-white">{mtkDevices.length}</p>
+                                    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-purple-200">MTK Devices</p>
+                                </div>
+                                <div className="rounded-2xl border border-blue-300/25 bg-blue-500/10 p-4">
+                                    <Cpu className="mb-4 h-6 w-6 text-blue-200" />
+                                    <p className="text-3xl font-black text-white">{snapdragonDevices.length}</p>
+                                    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-200">Snapdragon</p>
+                                </div>
                             </div>
 
-                            <div className="mt-6 rounded-2xl border border-red-400/20 bg-red-500/10 p-4">
-                                <p className="text-xs font-bold uppercase tracking-[0.18em] text-red-200">Flash warning</p>
-                                <p className="mt-2 text-sm leading-6 text-zinc-300">Unlock bootloader, back up data, and read install notes before flashing.</p>
+                            <div className="mt-4 grid gap-3">
+                                <PlatformPill accent="cyan"><ShieldCheck className="mr-2 h-4 w-4" /> Stability pipeline</PlatformPill>
+                                <PlatformPill accent="magenta"><Sparkles className="mr-2 h-4 w-4" /> Gaming / EPiC tuning</PlatformPill>
+                                <PlatformPill accent="gold">DeadZone Legend gold channel</PlatformPill>
                             </div>
                         </div>
                     </GlassCard>

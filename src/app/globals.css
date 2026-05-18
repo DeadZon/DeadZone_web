@@ -5,15 +5,15 @@
 @tailwind utilities;
 
 :root {
-  --background: #030203;
+  --background: #02050a;
   --foreground: #ffffff;
-  --primary: #ef1d36;
+  --primary: #22d3ee;
   --primary-foreground: #ffffff;
-  --accent: #ff3b4f;
+  --accent: #c026d3;
   --accent-foreground: #ffffff;
-  --card: rgba(18, 15, 17, 0.56);
+  --card: rgba(8, 13, 22, 0.62);
   --card-border: rgba(255, 255, 255, 0.08);
-  --sidebar: #070506;
+  --sidebar: #050912;
 }
 
 body {
@@ -44,26 +44,30 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, #ffffff 0%, #ff5263 45%, #ef1d36 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #67e8f9 35%, #60a5fa 62%, #e879f9 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .bg-mesh {
-  background-color: #030203;
+  background-color: #02050a;
   background-image: 
-    radial-gradient(at 12% 8%, rgba(239, 29, 54, 0.2) 0, transparent 36%),
-    radial-gradient(at 86% 14%, rgba(255, 59, 79, 0.12) 0, transparent 34%),
-    radial-gradient(at 50% 100%, rgba(120, 15, 24, 0.24) 0, transparent 44%),
-    linear-gradient(180deg, #080506 0%, #030203 48%, #050303 100%);
+    radial-gradient(at 12% 8%, rgba(34, 211, 238, 0.16) 0, transparent 34%),
+    radial-gradient(at 86% 14%, rgba(192, 38, 211, 0.16) 0, transparent 35%),
+    radial-gradient(at 50% 100%, rgba(37, 99, 235, 0.18) 0, transparent 45%),
+    linear-gradient(180deg, #07101c 0%, #02050a 48%, #030713 100%);
 }
 
 .deadzone-grid {
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    linear-gradient(rgba(103, 232, 249, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(217, 70, 239, 0.045) 1px, transparent 1px);
   background-size: 64px 64px;
   mask-image: linear-gradient(to bottom, black, transparent 78%);
+}
+
+.hud-card {
+  clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
 }
 
 .custom-scrollbar::-webkit-scrollbar {
@@ -85,11 +89,11 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Form Styles */
 .input-premium {
-  @apply bg-white/[0.03] border border-white/[0.06] rounded-2xl px-5 py-4 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-red-500/30 focus:border-red-500/50 transition-all duration-300;
+  @apply bg-white/[0.03] border border-white/[0.06] rounded-2xl px-5 py-4 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/30 focus:border-cyan-400/50 transition-all duration-300;
 }
 
 .button-primary {
-  @apply px-6 py-3 bg-red-600 hover:bg-red-500 text-white rounded-2xl font-bold transition-all duration-300 shadow-lg shadow-red-600/20 active:scale-95;
+  @apply px-6 py-3 bg-cyan-500 hover:bg-cyan-400 text-slate-950 rounded-2xl font-bold transition-all duration-300 shadow-lg shadow-cyan-500/20 active:scale-95;
 }
 
 .button-secondary {

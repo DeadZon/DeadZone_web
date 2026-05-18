@@ -4,12 +4,13 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import { Menu, X, Flame, Download, Shield, Send, Wrench, LayoutDashboard } from "lucide-react";
+import { Menu, X, CircuitBoard, Download, Shield, Send, Wrench, LayoutDashboard, Home } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
+    { name: "Home", href: "/", icon: Home },
     { name: "Downloads", href: "/download", icon: Download },
-    { name: "Devices", href: "/download#devices", icon: Shield },
+    { name: "Devices", href: "/devices", icon: Shield },
     { name: "Installation", href: "/installation", icon: Wrench },
     { name: "Community", href: "/community", icon: Send },
     { name: "Admin", href: "/admin", icon: LayoutDashboard },
@@ -35,14 +36,14 @@ export function Navbar() {
         >
             <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
                 <Link href="/" className="group flex min-w-0 items-center gap-3">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-red-400/25 bg-gradient-to-br from-red-700 to-zinc-950 shadow-lg shadow-red-600/20 transition-transform duration-300 group-hover:rotate-6">
-                        <Flame className="h-5 w-5 text-red-100" />
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-cyan-300/30 bg-gradient-to-br from-cyan-400/20 via-blue-500/20 to-fuchsia-500/20 shadow-lg shadow-cyan-500/20 transition-transform duration-300 group-hover:rotate-6">
+                        <CircuitBoard className="h-5 w-5 text-cyan-100" />
                     </div>
                     <div className="min-w-0">
                         <span className="block truncate text-lg font-black uppercase tracking-[0.16em] text-white sm:text-xl">
                             DeadZone
                         </span>
-                        <span className="hidden text-[10px] font-bold uppercase tracking-[0.28em] text-red-300/80 sm:block">
+                        <span className="hidden text-[10px] font-bold uppercase tracking-[0.28em] text-cyan-200/80 sm:block">
                             Premium Android ROM
                         </span>
                     </div>
@@ -51,7 +52,7 @@ export function Navbar() {
                 <div className="hidden items-center gap-1 lg:flex">
                     {navItems.map((item) => {
                         const baseHref = item.href.split("#")[0];
-                        const isActive = item.name === "Devices" ? pathname.startsWith("/download/") : pathname === baseHref;
+                        const isActive = pathname === baseHref || (item.name === "Devices" && pathname.startsWith("/devices"));
                         return (
                             <Link
                                 key={`${item.name}-${item.href}`}
@@ -64,7 +65,7 @@ export function Navbar() {
                                 {isActive && (
                                     <motion.div
                                         layoutId="deadzone-nav"
-                                        className="absolute inset-0 -z-10 rounded-2xl border border-red-400/25 bg-red-500/10"
+                                        className="absolute inset-0 -z-10 rounded-2xl border border-cyan-300/25 bg-cyan-400/10"
                                         transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                                     />
                                 )}
@@ -77,7 +78,7 @@ export function Navbar() {
 
                 <Link
                     href="/download"
-                    className="hidden min-h-11 items-center rounded-2xl bg-red-600 px-5 text-xs font-black uppercase tracking-[0.14em] text-white shadow-lg shadow-red-600/20 transition-all hover:bg-red-500 md:flex"
+                    className="hidden min-h-11 items-center rounded-2xl bg-cyan-400 px-5 text-xs font-black uppercase tracking-[0.14em] text-slate-950 shadow-lg shadow-cyan-500/20 transition-all hover:bg-cyan-300 md:flex"
                 >
                     Download
                 </Link>
@@ -99,7 +100,7 @@ export function Navbar() {
                 >
                     {navItems.map((item) => {
                         const baseHref = item.href.split("#")[0];
-                        const isActive = item.name === "Devices" ? pathname.startsWith("/download/") : pathname === baseHref;
+                        const isActive = pathname === baseHref || (item.name === "Devices" && pathname.startsWith("/devices"));
                         return (
                             <Link
                                 key={`${item.name}-${item.href}-mobile`}
@@ -107,7 +108,7 @@ export function Navbar() {
                                 onClick={() => setIsOpen(false)}
                                 className={cn(
                                     "flex min-h-12 items-center gap-3 rounded-2xl px-4 text-sm font-bold transition-colors",
-                                    isActive ? "bg-red-500/10 text-white" : "text-zinc-400 hover:bg-white/[0.05] hover:text-white"
+                                    isActive ? "bg-cyan-400/10 text-white" : "text-zinc-400 hover:bg-white/[0.05] hover:text-white"
                                 )}
                             >
                                 <item.icon className="h-5 w-5" />
