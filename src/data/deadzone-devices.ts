@@ -6,6 +6,7 @@ export type DeadZoneDevice = {
     platform: string;
     status: "supported" | "coming_soon";
     image?: string;
+    imageAlt?: string;
     bases?: string[];
     tags?: string[];
 };
@@ -16,6 +17,8 @@ const baseTags = ["Global Base", "China Base", "HyperOS 3", "Fastboot ZIP"];
 function withComputedTags<T extends Omit<DeadZoneDevice, "tags" | "bases">>(device: T): DeadZoneDevice {
     return {
         ...device,
+        image: device.image || `/devices/${device.codename}.webp`,
+        imageAlt: device.imageAlt || `${device.name} device image`,
         bases: ["Global Base", "China Base"],
         tags: [
             ...baseTags,

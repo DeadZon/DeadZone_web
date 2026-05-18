@@ -10,6 +10,7 @@ import { GlassCard, NeonDivider, PlatformPill, RomBadge, SectionHeader } from "@
 import { PremiumButton } from "@/components/ui/premium-button";
 import { allDevices, mtkDevices, snapdragonDevices } from "@/data/deadzone-devices";
 import { useRouter } from "next/navigation";
+import { DeviceImage } from "@/components/device-image";
 
 const promise = [
     "Stability",
@@ -34,6 +35,8 @@ const mainFeatures = [
     { title: "Gaming Focused", icon: Gamepad2, accent: "magenta" as const, desc: "Performance profiles, frame-rate unlock-ready workflows, and lower-latency interaction tuning for devices that can handle it." },
     { title: "Fully Secure", icon: Lock, accent: "blue" as const, desc: "Privacy-minded defaults, stability checks, clear flashing notes, and careful integrity language without promising unsupported banking bypasses." },
 ];
+
+const showcaseCodenames = ["zircon", "garnet", "xaga", "marble"];
 
 const core = [
     { label: "Performance", icon: Zap, accent: "cyan" as const },
@@ -79,6 +82,43 @@ export default function Home() {
                                 </GlassCard>
                             </motion.div>
                         ))}
+                    </div>
+                </div>
+            </section>
+
+            <section className="px-6 py-14">
+                <div className="mx-auto max-w-7xl">
+                    <SectionHeader
+                        eyebrow="Device Showcase"
+                        title="Real hardware, DeadZone presentation."
+                        description="Featured devices use local product images when available, with a premium fallback so the showcase never breaks."
+                        align="center"
+                    />
+                    <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
+                        {showcaseCodenames.map((codename, index) => {
+                            const device = allDevices.find((item) => item.codename === codename);
+                            if (!device) return null;
+
+                            return (
+                                <motion.div
+                                    key={device.codename}
+                                    initial={{ opacity: 0, y: 18 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: index * 0.06 }}
+                                >
+                                    <GlassCard accent={device.soc === "MTK" ? "purple" : "blue"} className="h-full p-5">
+                                        <DeviceImage codename={device.codename} name={device.name} src={device.image} alt={device.imageAlt} soc={device.soc} priority={index === 0} />
+                                        <h3 className="mt-5 text-lg font-black text-white">{device.name}</h3>
+                                        <p className="mt-2 font-mono text-xs uppercase tracking-[0.24em] text-zinc-500">{device.codename}</p>
+                                        <div className="mt-4 flex flex-wrap gap-2">
+                                            <RomBadge accent={device.soc === "MTK" ? "purple" : "blue"}>{device.soc}</RomBadge>
+                                            <RomBadge accent={device.status === "coming_soon" ? "slate" : "cyan"}>{device.status === "coming_soon" ? "Coming Soon" : "Stable"}</RomBadge>
+                                        </div>
+                                    </GlassCard>
+                                </motion.div>
+                            );
+                        })}
                     </div>
                 </div>
             </section>

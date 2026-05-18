@@ -4,12 +4,13 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Starfield } from "@/components/starfield";
 import { motion } from "framer-motion";
-import { Search, Cpu, ChevronRight, Layers, Smartphone, Server, HardDriveDownload, BadgeInfo } from "lucide-react";
+import { Search, ChevronRight, Layers, Smartphone, Server, HardDriveDownload, BadgeInfo } from "lucide-react";
 import React, { useState, useEffect, useMemo } from "react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { allDevices, DeadZoneDevice } from "@/data/deadzone-devices";
 import { GlassCard, RomBadge, SectionHeader, StatusBadge } from "@/components/ui/deadzone";
+import { DeviceImage } from "@/components/device-image";
 
 type PublicDevice = DeadZoneDevice & {
     id: string;
@@ -57,24 +58,6 @@ function fromApi(device: any): PublicDevice {
         chipset: device.chipset || staticMatch?.soc || soc,
         romCount: device.romCount || device.roms?.length || 0,
     };
-}
-
-function DeviceVisual({ device }: { device: PublicDevice }) {
-    const accent = device.soc === "MTK" ? "from-purple-400/35 via-fuchsia-500/15 to-cyan-300/20" : "from-blue-400/35 via-cyan-500/15 to-fuchsia-300/20";
-
-    return (
-        <div className={cn("relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-[1.35rem] border border-white/10 bg-gradient-to-br", accent)}>
-            <div className="absolute inset-0 deadzone-grid opacity-35" />
-            <div className="relative h-28 w-14 rounded-[1.4rem] border border-white/25 bg-black/55 p-1 shadow-2xl shadow-black/60">
-                <div className="h-full rounded-[1.05rem] border border-white/10 bg-gradient-to-b from-white/10 via-cyan-400/10 to-fuchsia-500/10">
-                    <div className="mx-auto mt-2 h-1 w-5 rounded-full bg-white/30" />
-                </div>
-            </div>
-            <div className="absolute bottom-3 left-3 rounded-full border border-white/10 bg-black/45 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-white">
-                {device.codename}
-            </div>
-        </div>
-    );
 }
 
 function SelectorGroup({ title, icon, options }: { title: string; icon: React.ReactNode; options: string[] }) {
@@ -199,7 +182,7 @@ export default function DownloadPage() {
                                     const accent = device.soc === "MTK" ? "purple" : "blue";
                                     const body = (
                                         <GlassCard accent={accent} className="h-full p-5 transition-all duration-500 group-hover:border-cyan-300/35">
-                                            <DeviceVisual device={device} />
+                                            <DeviceImage codename={device.codename} name={device.name} src={device.image} alt={device.imageAlt} soc={device.soc} />
                                             <div className="mt-5 flex items-start justify-between gap-4">
                                                 <div className="min-w-0">
                                                     <h3 className="text-xl font-black tracking-tight text-white">{device.name}</h3>

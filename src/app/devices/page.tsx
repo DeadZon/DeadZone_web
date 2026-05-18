@@ -10,6 +10,7 @@ import { Cpu, Monitor, Search } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import React, { useEffect, useMemo, useState } from "react";
+import { DeviceImage } from "@/components/device-image";
 
 type DeviceRow = DeadZoneDevice & {
     romCount: number;
@@ -128,6 +129,7 @@ export default function DevicesPage() {
                                         const hasRoms = device.romCount > 0;
                                         return (
                                             <GlassCard key={device.codename} accent={group.accent} className="p-5">
+                                                <DeviceImage codename={device.codename} name={device.name} src={device.image} alt={device.imageAlt} soc={device.soc} className="mb-5" />
                                                 <div className="mb-5 flex items-start justify-between gap-4">
                                                     <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-current/20 bg-white/[0.05]">
                                                         {device.soc === "MTK" ? <Monitor className="h-6 w-6" /> : <Cpu className="h-6 w-6" />}
