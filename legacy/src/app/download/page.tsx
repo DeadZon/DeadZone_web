@@ -4,8 +4,8 @@ import { DeviceList } from "@/sections/device-list";
 import prisma from "@/lib/prisma";
 
 export const metadata: Metadata = {
-  title: "Download | Project Move",
-  description: "Download MoveOS for your device. Find ROMs for Xiaomi, Redmi, and Poco devices.",
+  title: "Download | DeadZone",
+  description: "Download DeadZone for your device. Find ROMs for Xiaomi, Redmi, and Poco devices.",
 };
 
 async function getDevices() {
@@ -49,7 +49,7 @@ export default async function DownloadPage() {
             Find Your Device
           </h1>
           <p className="text-lg text-muted-foreground">
-            Search for your device and download the latest version of MoveOS. 
+            Search for your device and download the latest version of DeadZone. 
             We support Xiaomi, Redmi, and Poco devices with MediaTek chipsets.
           </p>
         </div>

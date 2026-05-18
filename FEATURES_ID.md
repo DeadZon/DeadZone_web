@@ -9,7 +9,7 @@
 - Konten dinamis yang terupdate secara instan (No stale data)
 
 ### 2. **Halaman Fitur**
-- Daftar lengkap fitur MoveOS
+- Daftar lengkap fitur DeadZone
 - Kartu fitur interaktif
 - Demonstrasi visual
 - UI premium dengan animasi

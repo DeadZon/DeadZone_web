@@ -44,7 +44,7 @@ export default function TermsOfServicePage() {
                             <section>
                                 <h2 className="text-2xl font-bold text-white mb-4">1. Acceptance of Terms</h2>
                                 <p>
-                                    By accessing and using Project Move's website and downloading our custom ROM (MoveOS),
+                                    By accessing and using DeadZone's website and downloading our custom ROM (DeadZone),
                                     you accept and agree to be bound by the terms and conditions of this agreement.
                                     If you do not agree with these terms, please do not use our services.
                                 </p>
@@ -53,7 +53,7 @@ export default function TermsOfServicePage() {
                             <section>
                                 <h2 className="text-2xl font-bold text-white mb-4">2. Use License</h2>
                                 <p>
-                                    MoveOS is provided free of charge for personal use. You may download, install, and use
+                                    DeadZone is provided free of charge for personal use. You may download, install, and use
                                     the ROM on your compatible MediaTek devices. However, you may not:
                                 </p>
                                 <ul className="list-disc pl-6 space-y-2 mt-4">
@@ -69,7 +69,7 @@ export default function TermsOfServicePage() {
                                 <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-6 my-6">
                                     <p className="text-amber-500 font-semibold mb-2">⚠️ IMPORTANT DISCLAIMER</p>
                                     <p className="text-sm">
-                                        MoveOS is provided "AS IS" without warranty of any kind. Installing custom ROMs
+                                        DeadZone is provided "AS IS" without warranty of any kind. Installing custom ROMs
                                         carries inherent risks including but not limited to:
                                     </p>
                                     <ul className="list-disc pl-6 space-y-1 mt-3 text-sm">
@@ -80,7 +80,7 @@ export default function TermsOfServicePage() {
                                     </ul>
                                 </div>
                                 <p>
-                                    You acknowledge that you install and use MoveOS at your own risk. Project Move and its
+                                    You acknowledge that you install and use DeadZone at your own risk. DeadZone and its
                                     team members are not responsible for any damage to your device or loss of data.
                                 </p>
                             </section>
@@ -88,16 +88,16 @@ export default function TermsOfServicePage() {
                             <section>
                                 <h2 className="text-2xl font-bold text-white mb-4">4. Limitation of Liability</h2>
                                 <p>
-                                    In no event shall Project Move, its developers, or contributors be liable for any
+                                    In no event shall DeadZone, its developers, or contributors be liable for any
                                     direct, indirect, incidental, special, or consequential damages arising out of the
-                                    use or inability to use MoveOS, even if advised of the possibility of such damages.
+                                    use or inability to use DeadZone, even if advised of the possibility of such damages.
                                 </p>
                             </section>
 
                             <section>
                                 <h2 className="text-2xl font-bold text-white mb-4">5. Third-Party Software</h2>
                                 <p>
-                                    MoveOS may include third-party software components, each subject to its own license terms.
+                                    DeadZone may include third-party software components, each subject to its own license terms.
                                     We are not affiliated with Google, Xiaomi, or any other manufacturer. Android is a
                                     trademark of Google LLC.
                                 </p>
@@ -105,7 +105,7 @@ export default function TermsOfServicePage() {
 
                             <section>
                                 <h2 className="text-2xl font-bold text-white mb-4">6. User Responsibilities</h2>
-                                <p>As a user of MoveOS, you are responsible for:</p>
+                                <p>As a user of DeadZone, you are responsible for:</p>
                                 <ul className="list-disc pl-6 space-y-2 mt-4">
                                     <li>Backing up your data before installation</li>
                                     <li>Following installation instructions carefully</li>
@@ -118,7 +118,7 @@ export default function TermsOfServicePage() {
                             <section>
                                 <h2 className="text-2xl font-bold text-white mb-4">7. Updates and Modifications</h2>
                                 <p>
-                                    We reserve the right to modify, suspend, or discontinue MoveOS or any part of it at any time
+                                    We reserve the right to modify, suspend, or discontinue DeadZone or any part of it at any time
                                     without prior notice. We may also update these Terms of Service periodically. Continued use
                                     of our services after changes constitutes acceptance of the new terms.
                                 </p>
@@ -127,7 +127,7 @@ export default function TermsOfServicePage() {
                             <section>
                                 <h2 className="text-2xl font-bold text-white mb-4">8. Community Guidelines</h2>
                                 <p>
-                                    When participating in Project Move communities (Telegram, GitHub, etc.), you agree to:
+                                    When participating in DeadZone communities (Telegram, GitHub, etc.), you agree to:
                                 </p>
                                 <ul className="list-disc pl-6 space-y-2 mt-4">
                                     <li>Be respectful to other users and team members</li>
@@ -140,8 +140,8 @@ export default function TermsOfServicePage() {
                             <section>
                                 <h2 className="text-2xl font-bold text-white mb-4">9. Intellectual Property</h2>
                                 <p>
-                                    The Project Move branding, website design, and original code are the intellectual property
-                                    of the Project Move team. MoveOS itself is based on the Android Open Source Project (AOSP)
+                                    The DeadZone branding, website design, and original code are the intellectual property
+                                    of the DeadZone team. DeadZone itself is based on the Android Open Source Project (AOSP)
                                     and other open-source components.
                                 </p>
                             </section>
@@ -164,7 +164,7 @@ export default function TermsOfServicePage() {
 
                             <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-6 mt-8">
                                 <p className="text-blue-500 font-semibold">
-                                    By downloading and installing MoveOS, you acknowledge that you have read, understood,
+                                    By downloading and installing DeadZone, you acknowledge that you have read, understood,
                                     and agree to be bound by these Terms of Service.
                                 </p>
                             </div>

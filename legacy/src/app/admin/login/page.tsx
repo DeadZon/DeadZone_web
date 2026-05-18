@@ -58,7 +58,7 @@ export default function AdminLoginPage() {
             </div>
             <CardTitle className="text-2xl font-display">Admin Login</CardTitle>
             <CardDescription>
-              Sign in to access the Project Move admin dashboard
+              Sign in to access the DeadZone admin dashboard
             </CardDescription>
           </CardHeader>
           <CardContent>

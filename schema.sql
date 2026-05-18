@@ -1,4 +1,4 @@
--- MoveOS Management System Schema
+-- DeadZone Management System Schema
 
 -- Devices Management
 CREATE TABLE IF NOT EXISTS "Device" (
@@ -66,7 +66,7 @@ INSERT INTO "Device" (id, name, codename, brand, chipset, description)
 VALUES ('1', 'Poco F5', 'marble', 'XIAOMI', 'Snapdragon 7+ Gen 2', 'The mid-range performance king.');
 
 INSERT INTO "Rom" (id, deviceId, name, version, androidVersion, downloadUrl, fileSize)
-VALUES ('1', '1', 'MoveOS v2.1', '2.1-STABLE', '14', 'https://download.projectmove.com/marble/MoveOS-2.1.zip', '2.4GB');
+VALUES ('1', '1', 'DeadZone v2.1', '2.1-STABLE', '14', 'https://download.projectmove.com/marble/DeadZone-2.1.zip', '2.4GB');
 
 -- Buat tabel SiteConfig jika belum ada
 CREATE TABLE IF NOT EXISTS "SiteConfig" (
@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS "SiteConfig" (
 
 -- Masukkan teks alert untuk Hero Section
 INSERT INTO "SiteConfig" ("key", "value") 
-VALUES ('heroAlertText', 'MoveOS v2.0 Now Available'),
+VALUES ('heroAlertText', 'DeadZone v2.0 Now Available'),
        ('visitor_count', '0')
 ON CONFLICT ("key") DO UPDATE SET "value" = EXCLUDED."value", "updatedAt" = CURRENT_TIMESTAMP;
 
@@ -129,11 +129,11 @@ CREATE TABLE IF NOT EXISTS "SocialLink" (
 
 -- Sample FAQ Data
 INSERT INTO "Faq" (id, question, answer, category, "order") VALUES
-('faq1', 'What is MoveOS?', 'MoveOS is a custom Android ROM built on AOSP, specifically optimized for MediaTek devices. It focuses on performance, battery life, and a clean user experience.', 'General', 0),
-('faq2', 'Is MoveOS safe to install?', 'Yes, but installing any custom ROM carries inherent risks including potential device damage and warranty void. Always backup your data first and follow installation instructions carefully.', 'Safety', 1),
-('faq3', 'Which devices are supported?', 'Currently, MoveOS supports select MediaTek devices. Check the Download page for the complete list of supported devices and their respective ROM versions.', 'Compatibility', 2),
+('faq1', 'What is DeadZone?', 'DeadZone is a custom Android ROM built on AOSP, specifically optimized for MediaTek devices. It focuses on performance, battery life, and a clean user experience.', 'General', 0),
+('faq2', 'Is DeadZone safe to install?', 'Yes, but installing any custom ROM carries inherent risks including potential device damage and warranty void. Always backup your data first and follow installation instructions carefully.', 'Safety', 1),
+('faq3', 'Which devices are supported?', 'Currently, DeadZone supports select MediaTek devices. Check the Download page for the complete list of supported devices and their respective ROM versions.', 'Compatibility', 2),
 ('faq4', 'Will this void my warranty?', 'Yes, installing custom ROMs typically voids your manufacturer warranty. Proceed only if you understand and accept this risk.', 'Safety', 3),
-('faq5', 'How do I install MoveOS?', 'Check our Installation Guide page for detailed step-by-step instructions. You will need an unlocked bootloader and a custom recovery like TWRP.', 'Installation', 4);
+('faq5', 'How do I install DeadZone?', 'Check our Installation Guide page for detailed step-by-step instructions. You will need an unlocked bootloader and a custom recovery like TWRP.', 'Installation', 4);
 
 -- Sample Screenshot Data
 INSERT INTO "Screenshot" (id, title, imageUrl, description, category, "order") VALUES
@@ -141,12 +141,12 @@ INSERT INTO "Screenshot" (id, title, imageUrl, description, category, "order") V
 ('ss2', 'Settings', 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800', 'Comprehensive settings interface', 'UI', 1),
 ('ss3', 'Quick Settings', 'https://images.unsplash.com/photo-1556656793-08538906a9f8?w=800', 'Customizable quick settings panel', 'Features', 2);
 
--- Sample Social Links (Real MoveOS Community Links)
+-- Sample Social Links (Real DeadZone Community Links)
 INSERT INTO "SocialLink" (id, platform, url, isActive) VALUES
 ('social1', 'github', 'https://github.com/sleep-bugy', TRUE),
-('social2', 'telegram', 'https://t.me/xMoveOS', TRUE),
-('social3', 'telegram', 'https://t.me/MoveOSDiscussion', TRUE),
-('social4', 'telegram', 'https://t.me/MoveOSCloud', TRUE);
+('social2', 'telegram', 'https://t.me/xDeadZone', TRUE),
+('social3', 'telegram', 'https://t.me/DeadZoneDiscussion', TRUE),
+('social4', 'telegram', 'https://t.me/DeadZoneCloud', TRUE);
 
 -- =====================================================
 -- ANALYTICS & TRACKING SETUP

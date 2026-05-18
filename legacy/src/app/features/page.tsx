@@ -4,8 +4,8 @@ import { ComparisonTable } from "@/sections/comparison-table";
 import { ScreenshotsGallery } from "@/sections/screenshots-gallery";
 
 export const metadata: Metadata = {
-  title: "Features | Project Move",
-  description: "Explore the powerful features of MoveOS. Performance, battery life, gaming, and more.",
+  title: "Features | DeadZone",
+  description: "Explore the powerful features of DeadZone. Performance, battery life, gaming, and more.",
 };
 
 export default function FeaturesPage() {
@@ -19,7 +19,7 @@ export default function FeaturesPage() {
             Everything You Need
           </h1>
           <p className="text-lg text-muted-foreground">
-            MoveOS is packed with features designed to enhance your Android experience. 
+            DeadZone is packed with features designed to enhance your Android experience. 
             From performance optimizations to gaming enhancements, we have got you covered.
           </p>
         </div>

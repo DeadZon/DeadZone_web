@@ -129,7 +129,7 @@ Click **"Environment Variables"** and add the following:
 
 1. Click **"Deploy"**
 2. Wait for build to complete (~2-3 minutes)
-3. Once deployed, you'll get a URL like: `https://project-move-website.vercel.app`
+3. Once deployed, you'll get a URL like: `https://deadzone-web-website.vercel.app`
 
 ---
 
@@ -450,4 +450,4 @@ Your ProjectMove website is now live! 🚀
 
 ---
 
-**Credits:** Built with ❤️ by [Mohammad Adi](https://github.com/sleep-bugy) and the Project Move Team
+**Credits:** Built with ❤️ by [Mohammad Adi](https://github.com/sleep-bugy) and the DeadZone Team

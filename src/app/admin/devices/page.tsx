@@ -100,7 +100,7 @@ export default function DevicesPage() {
                         Hardware Registry
                     </div>
                     <h1 className="text-3xl md:text-5xl font-black text-white tracking-tighter">Device Nodes</h1>
-                    <p className="text-zinc-500 text-sm font-medium mt-1">Manage supported hardware for the MoveOS ecosystem.</p>
+                    <p className="text-zinc-500 text-sm font-medium mt-1">Manage supported hardware for the DeadZone ecosystem.</p>
                 </div>
                 <button
                     onClick={() => setIsModalOpen(true)}

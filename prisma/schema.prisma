@@ -1,4 +1,4 @@
-// MoveOS Prisma Schema
+// DeadZone Prisma Schema
 
 generator client {
   provider = "prisma-client-js"
@@ -31,14 +31,23 @@ model Rom {
   name              String
   version           String
   androidVersion     String
+  flavor            String?
+  soc               String?
+  platform          String?
   type              String   @default("FREE")
   downloadUrl       String
+  githubRunUrl      String?
+  pixeldrainUrl     String?
+  sha256            String?
   fileSize          String?
   changelog         String?
   releaseDate       DateTime @default(now())
   screenshots       String[]
   installationGuide String?
   status            String   @default("ACTIVE")
+  isStable          Boolean  @default(true)
+  isTestBuild       Boolean  @default(false)
+  flashType         String?
   isVipOnly         Boolean  @default(false)
   downloads         Download[]
   createdAt         DateTime @default(now())
@@ -126,5 +135,4 @@ model SocialLink {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
-
 

@@ -82,7 +82,7 @@ export default function AdminScreenshotsPage() {
                         Visual Assets
                     </div>
                     <h1 className="text-3xl md:text-5xl font-black text-white tracking-tighter">Gallery Records</h1>
-                    <p className="text-zinc-500 text-sm font-medium mt-1">Curate the high-fidelity visual documentation for MoveOS.</p>
+                    <p className="text-zinc-500 text-sm font-medium mt-1">Curate the high-fidelity visual documentation for DeadZone.</p>
                 </div>
                 <button
                     onClick={() => setIsModalOpen(true)}

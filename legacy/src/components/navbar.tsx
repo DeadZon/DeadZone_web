@@ -57,9 +57,9 @@ export function Navbar() {
           </motion.div>
           <div className="flex flex-col">
             <span className="font-display font-bold text-lg leading-tight">
-              Project Move
+              DeadZone
             </span>
-            <span className="text-xs text-muted-foreground">MoveOS</span>
+            <span className="text-xs text-muted-foreground">DeadZone</span>
           </div>
         </Link>
 
@@ -121,8 +121,8 @@ export function Navbar() {
                   <Zap className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <span className="font-display font-bold">Project Move</span>
-                  <p className="text-xs text-muted-foreground">MoveOS</p>
+                  <span className="font-display font-bold">DeadZone</span>
+                  <p className="text-xs text-muted-foreground">DeadZone</p>
                 </div>
               </div>
               

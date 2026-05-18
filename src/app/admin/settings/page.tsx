@@ -6,7 +6,7 @@ import { Settings, Database, Server, Bell, Shield, Info, Layout, Check, Loader2,
 import { cn } from "@/lib/utils";
 
 export default function SettingsPage() {
-    const [heroText, setHeroText] = useState("MoveOS v2.0 Now Available");
+    const [heroText, setHeroText] = useState("DeadZone v2.0 Now Available");
     const [isLoading, setIsLoading] = useState(true);
     const [isSaving, setIsSaving] = useState(false);
     const [saveSuccess, setSaveSuccess] = useState(false);
@@ -88,7 +88,7 @@ export default function SettingsPage() {
                                     <input
                                         value={heroText}
                                         onChange={e => setHeroText(e.target.value)}
-                                        placeholder="e.g. MoveOS v2.0 Now Available"
+                                        placeholder="e.g. DeadZone v2.0 Now Available"
                                         className="flex-1 px-6 py-5 bg-white/[0.03] border border-white/[0.05] rounded-[1.5rem] text-white focus:outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500/30 transition-all font-bold placeholder:text-zinc-800"
                                     />
                                     <button
@@ -163,7 +163,7 @@ export default function SettingsPage() {
                             <h4 className="text-2xl font-black text-white tracking-tighter mb-4">Core v2.1.0</h4>
                             <div className="space-y-6">
                                 <p className="text-zinc-500 text-sm font-medium leading-relaxed">
-                                    All system-level configurations are currently synchronized with the <span className="text-indigo-400 font-bold">`project-move-config`</span> private cluster during the migration to Neon DB.
+                                    All system-level configurations are currently synchronized with the <span className="text-indigo-400 font-bold">`deadzone-web-config`</span> private cluster during the migration to Neon DB.
                                 </p>
 
                                 <div className="space-y-4">

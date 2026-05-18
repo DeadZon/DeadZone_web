@@ -9,7 +9,7 @@
 - Instant synchronization (No more stale data)
 
 ### 2. **Features Page**
-- Comprehensive list of MoveOS features
+- Comprehensive list of DeadZone features
 - Interactive feature cards
 - Visual demonstrations
 - Premium UI with animations

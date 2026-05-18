@@ -57,7 +57,7 @@ export default function CommunityPage() {
                         transition={{ delay: 0.1 }}
                         className="text-zinc-400 text-lg mb-12 leading-relaxed"
                     >
-                        Connect with fellow MoveOS users, get support, and stay updated with the latest developments.
+                        Connect with fellow DeadZone users, get support, and stay updated with the latest developments.
                     </motion.p>
 
                     {/* Social Links */}
@@ -112,7 +112,7 @@ export default function CommunityPage() {
                                 },
                                 {
                                     title: "Stay On Topic",
-                                    desc: "Keep discussions relevant to MoveOS and Android development. Off-topic spam will be removed."
+                                    desc: "Keep discussions relevant to DeadZone and Android development. Off-topic spam will be removed."
                                 },
                                 {
                                     title: "No Piracy",
@@ -128,7 +128,7 @@ export default function CommunityPage() {
                                 },
                                 {
                                     title: "Provide Details",
-                                    desc: "When reporting bugs or asking for help, provide as much detail as possible: device model, MoveOS version, steps to reproduce, logs, etc."
+                                    desc: "When reporting bugs or asking for help, provide as much detail as possible: device model, DeadZone version, steps to reproduce, logs, etc."
                                 }
                             ].map((guideline, i) => (
                                 <div key={i}>
@@ -143,7 +143,7 @@ export default function CommunityPage() {
                     <div className="bg-gradient-to-br from-blue-500/10 to-violet-500/10 border border-white/10 rounded-3xl p-8 md:p-12 text-center">
                         <h2 className="text-3xl font-bold text-white mb-4">Ready to Join?</h2>
                         <p className="text-zinc-400 mb-8 max-w-2xl mx-auto">
-                            Become part of the MoveOS family. Get help, share your experiences, and contribute to making MoveOS even better.
+                            Become part of the DeadZone family. Get help, share your experiences, and contribute to making DeadZone even better.
                         </p>
                         <div className="flex flex-wrap gap-4 justify-center">
                             <a href={socialLinks.find(l => l.platform === 'telegram')?.url || '#'} target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-gradient-to-r from-blue-500 to-violet-600 rounded-xl font-semibold hover:shadow-lg hover:shadow-blue-500/20 transition-all">

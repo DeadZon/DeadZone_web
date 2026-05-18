@@ -9,8 +9,8 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space-grotesk" });
 
 export const metadata: Metadata = {
-    title: "Project Move | MoveOS",
-    description: "Experience ultimate performance with MoveOS, the most advanced Android ROM for MediaTek devices.",
+    title: "DeadZone | DeadZone",
+    description: "Experience ultimate performance with DeadZone, the most advanced Android ROM for MediaTek devices.",
 };
 
 export default function RootLayout({

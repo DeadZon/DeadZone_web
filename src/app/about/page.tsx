@@ -28,7 +28,7 @@ export default function AboutPage() {
                             transition={{ delay: 0.1 }}
                             className="text-zinc-400 text-lg max-w-2xl mx-auto"
                         >
-                            Born out of a desire for a cleaner, faster Android, Project Move is the result of thousands of hours of optimization and testing.
+                            Born out of a desire for a cleaner, faster Android, DeadZone is the result of thousands of hours of optimization and testing.
                         </motion.p>
                     </div>
 
@@ -44,7 +44,7 @@ export default function AboutPage() {
                                 Our mission is simple: to provide the absolute best software experience for MediaTek-based Xiaomi devices. We believe that your hardware shouldn't be held back by subpar or bloated software.
                             </p>
                             <p className="text-zinc-400 leading-relaxed">
-                                Every release of MoveOS is a testament to our commitment to excellence, focusing on system stability, security, and uncompromising speed.
+                                Every release of DeadZone is a testament to our commitment to excellence, focusing on system stability, security, and uncompromising speed.
                             </p>
                         </motion.div>
                         <motion.div

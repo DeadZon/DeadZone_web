@@ -70,7 +70,7 @@ export function PreviewSection() {
         >
           <span className="text-purple-400 font-medium mb-4 block">UI Preview</span>
           <h2 className="text-3xl md:text-5xl font-bold font-display mb-6">
-            Experience MoveOS
+            Experience DeadZone
           </h2>
           <p className="text-lg text-muted-foreground">
             Take a glimpse at the sleek, modern interface designed for performance and aesthetics.

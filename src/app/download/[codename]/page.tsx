@@ -136,7 +136,7 @@ export default function DeviceDetailPage({ params }: { params: { codename: strin
                                 <ShieldCheck className="w-5 h-5 text-emerald-500" /> System Integrity
                             </h3>
                             <p className="text-zinc-400 text-sm leading-relaxed">
-                                This device is officially supported by MoveOS Team. All builds are verified and passed internal stability tests.
+                                This device is officially supported by DeadZone Team. All builds are verified and passed internal stability tests.
                             </p>
                         </div>
                     </div>
@@ -174,7 +174,7 @@ export default function DeviceDetailPage({ params }: { params: { codename: strin
                                             <div className="p-10 rounded-[3rem] glass border border-white/10 relative overflow-hidden">
                                                 <div className="flex flex-wrap items-center justify-between gap-6 mb-10">
                                                     <div>
-                                                        <h2 className="text-3xl font-bold text-white mb-2">MoveOS v{selectedRom.version}</h2>
+                                                        <h2 className="text-3xl font-bold text-white mb-2">DeadZone v{selectedRom.version}</h2>
                                                         <p className="text-zinc-500 text-sm">Released on {new Date(selectedRom.releaseDate).toLocaleDateString()}</p>
                                                     </div>
                                                     <PremiumButton
@@ -243,9 +243,9 @@ export default function DeviceDetailPage({ params }: { params: { codename: strin
                                                         2. Ensure your bootloader is unlocked.
                                                         3. Boot into your preferred custom recovery (TWRP/OrangeFox).
                                                         4. Wipe Data, Cache, and Dalvik.
-                                                        5. Flash the MoveOS zip file.
+                                                        5. Flash the DeadZone zip file.
                                                         6. (Optional) Flash Magisk for root access.
-                                                        7. Reboot and enjoy the MoveOS experience.`
+                                                        7. Reboot and enjoy the DeadZone experience.`
                                                     )}
                                                 </div>
                                             </div>

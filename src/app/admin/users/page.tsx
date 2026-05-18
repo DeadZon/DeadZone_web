@@ -137,7 +137,7 @@ export default function UserManagementPage() {
                                 <Globe className="w-6 h-6 text-indigo-400 mx-auto mb-3" />
                                 <h4 className="text-white font-black text-sm tracking-tight mb-1">Global Provisioning</h4>
                                 <p className="text-zinc-500 text-[10px] font-medium leading-normal italic">
-                                    Integration with MoveOS Global ID system is 82% complete.
+                                    Integration with DeadZone Global ID system is 82% complete.
                                 </p>
                             </div>
                         </div>

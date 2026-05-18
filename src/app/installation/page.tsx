@@ -36,7 +36,7 @@ export default function InstallationPage() {
                         transition={{ delay: 0.1 }}
                         className="text-zinc-400 text-lg mb-12 leading-relaxed"
                     >
-                        Follow these steps carefully to install MoveOS on your device.
+                        Follow these steps carefully to install DeadZone on your device.
                     </motion.p>
 
                     {/* Warning */}
@@ -72,7 +72,7 @@ export default function InstallationPage() {
                                         "Custom recovery (TWRP recommended)",
                                         "Charged battery (at least 70%)",
                                         "USB cable and computer",
-                                        "MoveOS ROM file downloaded from our website"
+                                        "DeadZone ROM file downloaded from our website"
                                     ].map((req, i) => (
                                         <li key={i} className="flex items-start gap-3 text-zinc-300">
                                             <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
@@ -101,8 +101,8 @@ export default function InstallationPage() {
                                     },
                                     {
                                         step: 2,
-                                        title: "Download MoveOS ROM",
-                                        desc: "Go to the Download page and download the MoveOS ROM file for your specific device. Verify the file integrity using the provided checksum."
+                                        title: "Download DeadZone ROM",
+                                        desc: "Go to the Download page and download the DeadZone ROM file for your specific device. Verify the file integrity using the provided checksum."
                                     },
                                     {
                                         step: 3,
@@ -121,8 +121,8 @@ export default function InstallationPage() {
                                     },
                                     {
                                         step: 6,
-                                        title: "Install MoveOS ROM",
-                                        desc: "In TWRP, tap Install. Navigate to the MoveOS ROM file you transferred earlier. Swipe to confirm flash. Wait for the installation to complete."
+                                        title: "Install DeadZone ROM",
+                                        desc: "In TWRP, tap Install. Navigate to the DeadZone ROM file you transferred earlier. Swipe to confirm flash. Wait for the installation to complete."
                                     },
                                     {
                                         step: 7,
@@ -132,7 +132,7 @@ export default function InstallationPage() {
                                     {
                                         step: 8,
                                         title: "Setup & Enjoy",
-                                        desc: "Once booted, go through the initial setup wizard. Restore your data if needed. Enjoy your new MoveOS experience!"
+                                        desc: "Once booted, go through the initial setup wizard. Restore your data if needed. Enjoy your new DeadZone experience!"
                                     }
                                 ].map((item) => (
                                     <div key={item.step} className="bg-white/5 border border-white/10 rounded-3xl p-8 hover:bg-white/[0.07] transition-colors">

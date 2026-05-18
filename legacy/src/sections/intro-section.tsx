@@ -48,12 +48,12 @@ export function IntroSection() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <span className="text-blue-400 font-medium mb-4 block">What is Project Move?</span>
+          <span className="text-blue-400 font-medium mb-4 block">What is DeadZone?</span>
           <h2 className="text-3xl md:text-5xl font-bold font-display mb-6">
             Redefining Android Experience
           </h2>
           <p className="text-lg text-muted-foreground">
-            Project Move is a custom Android ROM designed specifically for MediaTek-powered 
+            DeadZone is a custom Android ROM designed specifically for MediaTek-powered 
             Xiaomi, Redmi, and Poco devices. Our mission is to deliver exceptional performance, 
             extended battery life, and a clean user experience without compromises.
           </p>

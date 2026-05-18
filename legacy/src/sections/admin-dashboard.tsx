@@ -59,7 +59,7 @@ export function AdminDashboard({ stats }: AdminDashboardProps) {
         >
           <div>
             <h1 className="text-3xl md:text-4xl font-bold font-display">Admin Dashboard</h1>
-            <p className="text-muted-foreground">Manage your Project Move ecosystem</p>
+            <p className="text-muted-foreground">Manage your DeadZone ecosystem</p>
           </div>
           <Button variant="outline" onClick={handleLogout}>
             <LogOut className="w-4 h-4 mr-2" />

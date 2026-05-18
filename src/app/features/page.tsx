@@ -60,7 +60,7 @@ export default function FeaturesPage() {
                             animate={{ opacity: 1, y: 0 }}
                             className="text-4xl md:text-6xl font-bold mb-6"
                         >
-                            Why Choose <span className="text-gradient">MoveOS</span>?
+                            Why Choose <span className="text-gradient">DeadZone</span>?
                         </motion.h1>
                         <motion.p
                             initial={{ opacity: 0, y: 20 }}
@@ -102,7 +102,7 @@ export default function FeaturesPage() {
                     <div className="rounded-[2.5rem] glass overflow-hidden translate-z-0">
                         <div className="p-12">
                             <p className="text-zinc-400 leading-relaxed mb-8">
-                                MoveOS utilizes proprietary optimization techniques that go beyond standard ROM development.
+                                DeadZone utilizes proprietary optimization techniques that go beyond standard ROM development.
                                 Our team meticulously tunes every system component to match your specific hardware capabilities.
                             </p>
                             <div className="flex flex-wrap justify-center gap-4">

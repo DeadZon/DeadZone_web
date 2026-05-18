@@ -6,7 +6,7 @@ import { AdminDashboard } from "@/sections/admin-dashboard";
 import prisma from "@/lib/prisma";
 
 export const metadata: Metadata = {
-  title: "Admin Dashboard | Project Move",
+  title: "Admin Dashboard | DeadZone",
 };
 
 async function getStats() {

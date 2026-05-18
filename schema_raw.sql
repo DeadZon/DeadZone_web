@@ -1,5 +1,5 @@
--- Project Move Database Schema (Raw - No Sample Data)
--- PostgreSQL Schema for MoveOS Website
+-- DeadZone Database Schema (Raw - No Sample Data)
+-- PostgreSQL Schema for DeadZone Website
 
 -- Device Table
 CREATE TABLE IF NOT EXISTS "Device" (

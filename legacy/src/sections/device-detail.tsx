@@ -283,7 +283,7 @@ export function DeviceDetail({ device }: DeviceDetailProps) {
                       <li>Wipe data, cache, and dalvik cache</li>
                       <li>Flash the ROM zip file</li>
                       <li>Flash GApps (optional, for Google services)</li>
-                      <li>Reboot and enjoy MoveOS!</li>
+                      <li>Reboot and enjoy DeadZone!</li>
                     </ol>
                   </div>
 

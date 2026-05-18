@@ -59,7 +59,7 @@ export default function GalleryPage() {
                         transition={{ delay: 0.1 }}
                         className="text-zinc-400 text-lg mb-12 leading-relaxed"
                     >
-                        Explore MoveOS UI and features through screenshots.
+                        Explore DeadZone UI and features through screenshots.
                     </motion.p>
 
                     {/* Category Filter */}

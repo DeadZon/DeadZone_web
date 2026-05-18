@@ -89,7 +89,7 @@ export default function AdminTeamPage() {
                 <div>
                     <div className="flex items-center gap-2 text-indigo-500 font-black text-[10px] uppercase tracking-[0.3em] mb-2">
                         <Users className="w-3 h-3" />
-                        MoveOS Contributors
+                        DeadZone Contributors
                     </div>
                     <h1 className="text-3xl md:text-5xl font-black text-white tracking-tighter">Team Roster</h1>
                     <p className="text-zinc-500 text-sm font-medium mt-1">Manage the core developers and creators behind the ecosystem.</p>

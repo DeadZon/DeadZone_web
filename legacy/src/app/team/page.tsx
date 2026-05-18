@@ -3,8 +3,8 @@ import { TeamGrid } from "@/sections/team-grid";
 import prisma from "@/lib/prisma";
 
 export const metadata: Metadata = {
-  title: "Team | Project Move",
-  description: "Meet the talented team behind Project Move and MoveOS.",
+  title: "Team | DeadZone",
+  description: "Meet the talented team behind DeadZone and DeadZone.",
 };
 
 async function getTeamMembers() {
@@ -32,7 +32,7 @@ export default async function TeamPage() {
         <div className="max-w-3xl mx-auto text-center">
           <span className="text-blue-400 font-medium mb-4 block">Our Team</span>
           <h1 className="text-4xl md:text-6xl font-bold font-display mb-6">
-            Meet the Minds Behind MoveOS
+            Meet the Minds Behind DeadZone
           </h1>
           <p className="text-lg text-muted-foreground">
             A passionate group of developers, designers, and enthusiasts dedicated to 

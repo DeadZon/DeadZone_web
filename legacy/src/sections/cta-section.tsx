@@ -40,12 +40,12 @@ export function CTASection() {
 
               <h2 className="text-3xl md:text-5xl font-bold font-display mb-6">
                 Ready to Experience
-                <span className="text-gradient block mt-2">MoveOS?</span>
+                <span className="text-gradient block mt-2">DeadZone?</span>
               </h2>
 
               <p className="text-lg text-muted-foreground mb-10 max-w-2xl mx-auto">
                 Join thousands of users who have already transformed their Android experience. 
-                Download MoveOS today and unlock the full potential of your device.
+                Download DeadZone today and unlock the full potential of your device.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">

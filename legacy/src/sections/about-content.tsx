@@ -13,7 +13,7 @@ const values = [
   {
     icon: Heart,
     title: "Community Driven",
-    description: "Project Move is built by the community, for the community. We listen to feedback and continuously improve based on user needs.",
+    description: "DeadZone is built by the community, for the community. We listen to feedback and continuously improve based on user needs.",
   },
   {
     icon: Shield,
@@ -28,7 +28,7 @@ const values = [
 ];
 
 const milestones = [
-  { year: "2022", event: "Project Move founded" },
+  { year: "2022", event: "DeadZone founded" },
   { year: "2023", event: "First public release" },
   { year: "2023", event: "10+ devices supported" },
   { year: "2024", event: "VIP program launched" },

@@ -35,13 +35,13 @@ export async function generateMetadata({ params }: DevicePageProps): Promise<Met
   
   if (!device) {
     return {
-      title: "Device Not Found | Project Move",
+      title: "Device Not Found | DeadZone",
     };
   }
 
   return {
-    title: `${device.name} | Download | Project Move`,
-    description: `Download MoveOS for ${device.name} (${device.codename}). Latest ROM versions and installation guides.`,
+    title: `${device.name} | Download | DeadZone`,
+    description: `Download DeadZone for ${device.name} (${device.codename}). Latest ROM versions and installation guides.`,
   };
 }
 

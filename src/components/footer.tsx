@@ -16,7 +16,7 @@ export function Footer() {
                             <span className="text-xl font-bold tracking-tight text-white">Project<span className="text-blue-500">Move</span></span>
                         </Link>
                         <p className="text-zinc-400 text-sm leading-relaxed mb-6">
-                            Experience the ultimate performance on your MediaTek device with MoveOS. Designed for enthusiasts, by enthusiasts.
+                            Experience the ultimate performance on your MediaTek device with DeadZone. Designed for enthusiasts, by enthusiasts.
                         </p>
                         <div className="flex gap-3">
                             <Link href="#" className="w-9 h-9 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors">
@@ -66,7 +66,7 @@ export function Footer() {
 
                 {/* Bottom Bar */}
                 <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-                    <p className="text-zinc-500 text-xs">© {new Date().getFullYear()} Project Move. Not affiliated with Google or Xiaomi.</p>
+                    <p className="text-zinc-500 text-xs">© {new Date().getFullYear()} DeadZone. Not affiliated with Google or Xiaomi.</p>
                 </div>
             </div>
         </footer>

@@ -77,7 +77,7 @@ export function HeroSection() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="font-display text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight"
           >
-            <span className="text-gradient">Project Move</span>
+            <span className="text-gradient">DeadZone</span>
           </motion.h1>
 
           {/* Subtitle */}
@@ -87,7 +87,7 @@ export function HeroSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-xl md:text-2xl lg:text-3xl text-muted-foreground mb-4 font-display"
           >
-            MoveOS — Performance Beyond Limits
+            DeadZone — Performance Beyond Limits
           </motion.p>
 
           {/* Description */}

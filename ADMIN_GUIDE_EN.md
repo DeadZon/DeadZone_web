@@ -67,10 +67,10 @@ Manage the ecosystem of supported hardware:
 - **Modify/Delete**: Use the icons on each device card to update specs or remove a device.
 
 ### 4. ROM Repository (ROMs - `/admin/roms`)
-Control the distribution of MoveOS builds:
+Control the distribution of DeadZone builds:
 - **Authorize Build**: Links a ROM file to a specific device registry.
   - **Target Hardware**: Select the device from the dropdown.
-  - **Build Designation**: The version name (e.g., "MoveOS v2 Stable").
+  - **Build Designation**: The version name (e.g., "DeadZone v2 Stable").
   - **Version Vector**: The specific version number (e.g., "2.0.1").
   - **Deployment Track**: Choose between "Official Stable", "Community", or "Experimental".
   - **Revision Changelog**: Use this area to detail what's new in this build.
@@ -83,7 +83,7 @@ Control the distribution of MoveOS builds:
 
 ### 6. Interaction Log (Contact Forms - `/admin/contact`)
 - **Bug Reports**: Filter submissions specifically for bugs to prioritize development.
-- **Feature Requests**: Review user suggestions for future MoveOS versions.
+- **Feature Requests**: Review user suggestions for future DeadZone versions.
 - **Audit Status**: Mark messages as "Read" or "Resolved" to track progress.
 
 ### 7. Knowledge Base (FAQ - `/admin/faq`)
@@ -94,7 +94,7 @@ Manage the platform's support documentation:
 - **Sequence Index**: Set a number to control the order in which FAQs appear.
 
 ### 8. Visual Assets (Screenshots - `/admin/screenshots`)
-Curate the high-fidelity gallery for MoveOS:
+Curate the high-fidelity gallery for DeadZone:
 - **Register Snapshot**: Add a new capture to the visual records.
 - **Asset Source URL**: Use a direct link (e.g., from Catbox) ending in `.jpg` or `.png`.
 - **Category Sector**: Group screenshots by "System UI", "Performance", etc.

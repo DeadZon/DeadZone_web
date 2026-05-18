@@ -44,7 +44,7 @@ export default function PrivacyPolicyPage() {
                             <section>
                                 <h2 className="text-2xl font-bold text-white mb-4">1. Introduction</h2>
                                 <p>
-                                    Welcome to Project Move. We respect your privacy and are committed to protecting your personal data.
+                                    Welcome to DeadZone. We respect your privacy and are committed to protecting your personal data.
                                     This privacy policy will inform you about how we handle your data when you visit our website and
                                     download our custom ROM.
                                 </p>

@@ -2,8 +2,8 @@ import { Metadata } from "next";
 import { AboutContent } from "@/sections/about-content";
 
 export const metadata: Metadata = {
-  title: "About | Project Move",
-  description: "Learn about Project Move, our vision, goals, and philosophy behind MoveOS.",
+  title: "About | DeadZone",
+  description: "Learn about DeadZone, our vision, goals, and philosophy behind DeadZone.",
 };
 
 export default function AboutPage() {

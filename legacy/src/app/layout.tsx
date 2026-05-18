@@ -16,19 +16,19 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Project Move | MoveOS - Performance Beyond Limits",
-  description: "Custom Android ROM for MediaTek Xiaomi/Redmi/Poco devices. Experience performance beyond limits with MoveOS.",
-  keywords: ["Android ROM", "Custom ROM", "MoveOS", "Project Move", "MediaTek", "Xiaomi", "Redmi", "Poco"],
-  authors: [{ name: "Project Move Team" }],
+  title: "DeadZone | DeadZone - Performance Beyond Limits",
+  description: "Custom Android ROM for MediaTek Xiaomi/Redmi/Poco devices. Experience performance beyond limits with DeadZone.",
+  keywords: ["Android ROM", "Custom ROM", "DeadZone", "DeadZone", "MediaTek", "Xiaomi", "Redmi", "Poco"],
+  authors: [{ name: "DeadZone Team" }],
   openGraph: {
-    title: "Project Move | MoveOS",
+    title: "DeadZone | DeadZone",
     description: "Performance Beyond Limits - Custom Android ROM for MediaTek devices",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Project Move | MoveOS",
+    title: "DeadZone | DeadZone",
     description: "Performance Beyond Limits - Custom Android ROM for MediaTek devices",
   },
   robots: {

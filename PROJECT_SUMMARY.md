@@ -1,13 +1,13 @@
-# Project Move - Fullstack Website Summary
+# DeadZone - Fullstack Website Summary
 
 ## Overview
 
-A modern, high-performance fullstack website for the **Project Move** custom Android ROM project featuring **MoveOS** - a performance-focused Android ROM optimized for MediaTek-powered Xiaomi/Redmi/Poco devices.
+A modern, high-performance fullstack website for the **DeadZone** custom Android ROM project featuring **DeadZone** - a performance-focused Android ROM optimized for MediaTek-powered Xiaomi/Redmi/Poco devices.
 
 ## Project Structure
 
 ```
-project-move/
+deadzone-web/
 ├── src/
 │   ├── app/                    # Next.js 14 App Router
 │   │   ├── (pages)/            # Public pages
@@ -77,7 +77,7 @@ project-move/
 1. **Home Page**
    - Animated hero section with gradient text
    - Statistics counter with animated numbers
-   - Introduction to Project Move
+   - Introduction to DeadZone
    - UI preview carousel
    - Call-to-action section
 
@@ -264,4 +264,4 @@ MIT License
 
 ## Credits
 
-Made with passion by the Project Move Team
+Made with passion by the DeadZone Team

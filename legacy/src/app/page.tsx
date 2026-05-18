@@ -6,8 +6,8 @@ import { CTASection } from "@/sections/cta-section";
 import { StatsSection } from "@/sections/stats-section";
 
 export const metadata: Metadata = {
-  title: "Project Move | MoveOS - Performance Beyond Limits",
-  description: "Custom Android ROM for MediaTek Xiaomi/Redmi/Poco devices. Experience performance beyond limits with MoveOS.",
+  title: "DeadZone | DeadZone - Performance Beyond Limits",
+  description: "Custom Android ROM for MediaTek Xiaomi/Redmi/Poco devices. Experience performance beyond limits with DeadZone.",
 };
 
 export default function HomePage() {

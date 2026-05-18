@@ -28,7 +28,27 @@ export async function GET(req: Request) {
 export async function POST(req: Request) {
     try {
         const body = await req.json();
-        const { deviceId, name, version, androidVersion, type, downloadUrl, fileSize, changelog, installationGuide, isVipOnly } = body;
+        const {
+            deviceId,
+            name,
+            version,
+            androidVersion,
+            flavor,
+            soc,
+            platform,
+            type,
+            downloadUrl,
+            githubRunUrl,
+            pixeldrainUrl,
+            sha256,
+            fileSize,
+            changelog,
+            installationGuide,
+            isStable,
+            isTestBuild,
+            flashType,
+            isVipOnly,
+        } = body;
 
         const rom = await prisma.rom.create({
             data: {
@@ -36,11 +56,20 @@ export async function POST(req: Request) {
                 name,
                 version,
                 androidVersion,
+                flavor,
+                soc,
+                platform,
                 type: type || "FREE",
                 downloadUrl,
+                githubRunUrl,
+                pixeldrainUrl,
+                sha256,
                 fileSize,
                 changelog,
                 installationGuide,
+                isStable: isStable ?? true,
+                isTestBuild: isTestBuild ?? false,
+                flashType,
                 isVipOnly: isVipOnly || false,
             }
         });

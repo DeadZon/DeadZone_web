@@ -5,7 +5,7 @@ import { PremiumButton } from "./ui/premium-button";
 import { useRouter } from "next/navigation";
 
 export function HeroSection() {
-    const [heroAlert, setHeroAlert] = useState("MoveOS v2.0 Now Available");
+    const [heroAlert, setHeroAlert] = useState("DeadZone v2.0 Now Available");
     const router = useRouter();
 
     useEffect(() => {
@@ -51,7 +51,7 @@ export function HeroSection() {
                         transition={{ delay: 0.2, duration: 0.8 }}
                         className="text-lg md:text-xl text-zinc-400 max-w-2xl mb-12 leading-relaxed"
                     >
-                        MoveOS is a performance-first Android ROM optimized for MediaTek-powered Xiaomi,
+                        DeadZone is a performance-first Android ROM optimized for MediaTek-powered Xiaomi,
                         Redmi, and Poco devices. Zero bloat, maximum efficiency.
                     </motion.p>
 

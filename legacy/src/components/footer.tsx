@@ -48,8 +48,8 @@ export function Footer() {
                 <Zap className="w-5 h-5 text-white" />
               </div>
               <div>
-                <span className="font-display font-bold">Project Move</span>
-                <p className="text-xs text-muted-foreground">MoveOS</p>
+                <span className="font-display font-bold">DeadZone</span>
+                <p className="text-xs text-muted-foreground">DeadZone</p>
               </div>
             </Link>
             <p className="text-sm text-muted-foreground mb-6 max-w-xs">
@@ -141,7 +141,7 @@ export function Footer() {
         {/* Bottom */}
         <div className="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} Project Move. All rights reserved.
+            &copy; {new Date().getFullYear()} DeadZone. All rights reserved.
           </p>
           <p className="text-sm text-muted-foreground">
             Made with passion for the Android community
