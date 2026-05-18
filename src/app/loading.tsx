@@ -1,16 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Zap } from "lucide-react";
+import { Flame } from "lucide-react";
 
 export default function Loading() {
     return (
-        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-[#05070a]">
+        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-[#030203]">
             {/* Background elements to match the site theme */}
             <div className="absolute inset-0 bg-mesh opacity-50" />
             <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/10 blur-[120px] rounded-full animate-pulse" />
-                <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-violet-600/10 blur-[120px] rounded-full animate-pulse delay-700" />
+                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-red-600/10 blur-[120px] rounded-full animate-pulse" />
+                <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-rose-600/10 blur-[120px] rounded-full animate-pulse delay-700" />
             </div>
 
             <div className="relative z-10 flex flex-col items-center">
@@ -23,9 +23,9 @@ export default function Loading() {
                         repeatType: "reverse",
                         ease: "easeInOut"
                     }}
-                    className="w-24 h-24 bg-gradient-to-br from-blue-500 to-violet-600 rounded-3xl flex items-center justify-center shadow-2xl shadow-blue-500/20 mb-8"
+                    className="w-24 h-24 bg-gradient-to-br from-red-700 to-zinc-950 rounded-3xl flex items-center justify-center shadow-2xl shadow-red-600/20 mb-8 border border-red-400/25"
                 >
-                    <Zap className="text-white w-12 h-12" />
+                    <Flame className="text-red-100 w-12 h-12" />
                 </motion.div>
 
                 <motion.div
@@ -35,7 +35,7 @@ export default function Loading() {
                     className="flex flex-col items-center gap-2"
                 >
                     <h2 className="text-2xl font-black text-white tracking-tight">
-                        Project<span className="text-blue-500">Move</span>
+                        Dead<span className="text-red-400">Zone</span>
                     </h2>
                     <div className="flex gap-1.5">
                         {[0, 1, 2].map((i) => (
@@ -51,7 +51,7 @@ export default function Loading() {
                                     delay: i * 0.2,
                                     ease: "easeInOut"
                                 }}
-                                className="w-1.5 h-1.5 rounded-full bg-blue-500"
+                                className="w-1.5 h-1.5 rounded-full bg-red-500"
                             />
                         ))}
                     </div>

@@ -9,8 +9,8 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space-grotesk" });
 
 export const metadata: Metadata = {
-    title: "DeadZone | DeadZone",
-    description: "Experience ultimate performance with DeadZone, the most advanced Android ROM for MediaTek devices.",
+    title: "DeadZone ROM",
+    description: "Premium DeadZone Android ROM builds for Snapdragon and MTK devices.",
 };
 
 export default function RootLayout({
@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" suppressHydrationWarning>
-            <body className={`${inter.variable} ${spaceGrotesk.variable} antialiased selection:bg-blue-500/30`}>
+            <body className={`${inter.variable} ${spaceGrotesk.variable} antialiased selection:bg-red-500/30`}>
                 <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
                     <SplashLoader>
                         <VisitorTracker />

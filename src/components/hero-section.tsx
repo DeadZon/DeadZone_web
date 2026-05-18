@@ -1,11 +1,14 @@
+"use client";
+
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Cpu, Zap, Smartphone } from "lucide-react";
+import { ArrowRight, Cpu, Download, Flame, Send, ShieldCheck, Smartphone } from "lucide-react";
 import { PremiumButton } from "./ui/premium-button";
 import { useRouter } from "next/navigation";
+import { GlassCard, RomBadge } from "./ui/deadzone";
 
 export function HeroSection() {
-    const [heroAlert, setHeroAlert] = useState("DeadZone v2.0 Now Available");
+    const [heroAlert, setHeroAlert] = useState("DeadZone release channel online");
     const router = useRouter();
 
     useEffect(() => {
@@ -22,82 +25,110 @@ export function HeroSection() {
     }, []);
 
     return (
-        <section className="relative pt-32 pb-20 overflow-hidden">
-            <div className="max-w-7xl mx-auto px-6 relative z-10">
-                <div className="flex flex-col items-center text-center">
+        <section className="relative overflow-hidden px-6 pb-16 pt-32 sm:pt-36 lg:pb-24">
+            <div className="deadzone-grid pointer-events-none absolute inset-x-0 top-0 h-[680px] opacity-40" />
+            <div className="pointer-events-none absolute left-1/2 top-24 h-[360px] w-[360px] -translate-x-1/2 rounded-full bg-red-600/20 blur-[120px] md:h-[520px] md:w-[520px]" />
+
+            <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[1.04fr_0.96fr]">
+                <div>
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.5 }}
-                        className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass mb-8 animate-pulse"
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="mb-7 inline-flex items-center gap-3 rounded-full border border-red-400/20 bg-red-500/10 px-4 py-2 backdrop-blur-xl"
                     >
-                        <span className="w-2 h-2 bg-blue-500 rounded-full" />
-                        <span className="text-xs font-semibold uppercase tracking-wider text-blue-400">{heroAlert}</span>
+                        <span className="h-2 w-2 rounded-full bg-red-400 shadow-[0_0_18px_rgba(248,113,113,0.9)]" />
+                        <span className="text-[11px] font-black uppercase tracking-[0.2em] text-red-100">{heroAlert}</span>
                     </motion.div>
 
                     <motion.h1
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.1, duration: 0.8 }}
-                        className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-8"
+                        transition={{ delay: 0.08, duration: 0.7 }}
+                        className="max-w-4xl text-5xl font-black leading-[0.95] tracking-tight text-white sm:text-6xl lg:text-8xl"
                     >
-                        Ultimate <span className="text-gradient">Performance</span><br />
-                        For Your Device
+                        DeadZone ROM for serious Android performance.
                     </motion.h1>
 
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2, duration: 0.8 }}
-                        className="text-lg md:text-xl text-zinc-400 max-w-2xl mb-12 leading-relaxed"
+                        transition={{ delay: 0.16, duration: 0.7 }}
+                        className="mt-7 max-w-2xl text-base leading-8 text-zinc-300 sm:text-lg"
                     >
-                        DeadZone is a performance-first Android ROM optimized for MediaTek-powered Xiaomi,
-                        Redmi, and Poco devices. Zero bloat, maximum efficiency.
+                        A cinematic, gaming-ready ROM foundation for Snapdragon and MTK devices. Clean builds, clear metadata, verified downloads, and a dashboard built for real release operations.
                     </motion.p>
 
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.3, duration: 0.8 }}
-                        className="flex flex-col sm:flex-row gap-6 mb-20"
+                        transition={{ delay: 0.24, duration: 0.7 }}
+                        className="mt-9 grid gap-3 sm:flex sm:flex-wrap"
                     >
-                        <PremiumButton
-                            onClick={() => router.push("/download")}
-                            icon={<ArrowRight className="w-5 h-5" />}
-                        >
-                            Get Started
+                        <PremiumButton onClick={() => router.push("/download")} icon={<Download className="h-5 w-5" />}>
+                            Download ROMs
                         </PremiumButton>
-                        <button
-                            onClick={() => router.push("/features")}
-                            className="px-8 py-4 glass hover:bg-white/10 text-white rounded-2xl font-semibold flex items-center justify-center gap-2 transition-all"
-                        >
-                            Learn More
-                        </button>
+                        <PremiumButton variant="secondary" onClick={() => router.push("/download")} icon={<Smartphone className="h-5 w-5" />}>
+                            View Supported Devices
+                        </PremiumButton>
+                        <PremiumButton variant="secondary" onClick={() => router.push("/community")} icon={<Send className="h-5 w-5" />}>
+                            Join Telegram
+                        </PremiumButton>
                     </motion.div>
 
-                    {/* Key Features Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl">
-                        {[
-                            { icon: Cpu, title: "Optimized Kernel", desc: "Tuned for low latency and high responsiveness." },
-                            { icon: Zap, title: "Ultra Stable", desc: "Rigorous testing for daily driver reliability." },
-                            { icon: Smartphone, title: "Modern UI", desc: "Clean aesthetics with useful customizations." },
-                        ].map((feature, i) => (
-                            <motion.div
-                                key={i}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.4 + i * 0.1, duration: 0.8 }}
-                                className="p-8 rounded-3xl glass text-left group hover:bg-white/[0.05] transition-colors"
-                            >
-                                <div className="w-12 h-12 bg-blue-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                                    <feature.icon className="text-blue-500 w-6 h-6" />
-                                </div>
-                                <h3 className="text-xl font-bold mb-2 text-white">{feature.title}</h3>
-                                <p className="text-zinc-400 text-sm leading-relaxed">{feature.desc}</p>
-                            </motion.div>
-                        ))}
+                    <div className="mt-8 flex flex-wrap gap-3">
+                        <RomBadge>DeadZone Base</RomBadge>
+                        <RomBadge>Gaming</RomBadge>
+                        <RomBadge>EPiC</RomBadge>
+                        <RomBadge>Legend</RomBadge>
                     </div>
                 </div>
+
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.96, y: 20 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    transition={{ delay: 0.18, duration: 0.8 }}
+                    className="relative"
+                >
+                    <GlassCard className="p-5 sm:p-6">
+                        <div className="rounded-[1.5rem] border border-white/10 bg-black/50 p-5">
+                            <div className="mb-6 flex items-center justify-between gap-4">
+                                <div className="flex items-center gap-3">
+                                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-red-500/10">
+                                        <Flame className="h-6 w-6 text-red-300" />
+                                    </div>
+                                    <div>
+                                        <p className="text-sm font-black uppercase tracking-[0.18em] text-white">DeadZone Control</p>
+                                        <p className="text-xs text-zinc-500">Release pipeline preview</p>
+                                    </div>
+                                </div>
+                                <span className="rounded-full border border-emerald-400/20 bg-emerald-500/10 px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em] text-emerald-200">
+                                    Stable
+                                </span>
+                            </div>
+
+                            <div className="space-y-3">
+                                {[
+                                    { icon: Cpu, label: "Platform", value: "Snapdragon / MTK" },
+                                    { icon: ShieldCheck, label: "Integrity", value: "SHA-256 checksums" },
+                                    { icon: ArrowRight, label: "Flow", value: "Actions -> Release -> Install" },
+                                ].map((item) => (
+                                    <div key={item.label} className="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+                                        <div className="flex items-center gap-3">
+                                            <item.icon className="h-5 w-5 text-red-300" />
+                                            <span className="text-xs font-black uppercase tracking-[0.16em] text-zinc-500">{item.label}</span>
+                                        </div>
+                                        <span className="text-right text-sm font-bold text-white">{item.value}</span>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div className="mt-6 rounded-2xl border border-red-400/20 bg-red-500/10 p-4">
+                                <p className="text-xs font-bold uppercase tracking-[0.18em] text-red-200">Flash warning</p>
+                                <p className="mt-2 text-sm leading-6 text-zinc-300">Unlock bootloader, back up data, and read install notes before flashing.</p>
+                            </div>
+                        </div>
+                    </GlassCard>
+                </motion.div>
             </div>
         </section>
     );

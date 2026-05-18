@@ -10,9 +10,10 @@ interface PremiumButtonProps {
     className?: string;
     icon?: React.ReactNode;
     loading?: boolean;
+    variant?: "primary" | "secondary";
 }
 
-export function PremiumButton({ children, onClick, className, icon, loading }: PremiumButtonProps) {
+export function PremiumButton({ children, onClick, className, icon, loading, variant = "primary" }: PremiumButtonProps) {
     const [particles, setParticles] = useState<number[]>([]);
 
     const handleClick = () => {
@@ -55,9 +56,11 @@ export function PremiumButton({ children, onClick, className, icon, loading }: P
                 onClick={handleClick}
                 disabled={loading}
                 className={cn(
-                    "relative overflow-hidden px-8 py-4 rounded-2xl font-black text-sm uppercase tracking-tight transition-all duration-300",
-                    "bg-gradient-to-r from-indigo-600 via-indigo-500 to-violet-600 text-white shadow-xl shadow-indigo-600/20",
-                    "hover:shadow-indigo-500/40 hover:brightness-110 active:brightness-90",
+                    "group relative overflow-hidden px-8 py-4 rounded-2xl font-black text-sm uppercase tracking-tight transition-all duration-300",
+                    variant === "primary"
+                        ? "bg-gradient-to-r from-red-700 via-red-600 to-rose-500 text-white shadow-xl shadow-red-600/20 hover:shadow-red-500/40"
+                        : "bg-white/[0.06] text-white border border-white/10 hover:bg-white/[0.1] hover:border-red-400/35",
+                    "hover:brightness-110 active:brightness-90 disabled:opacity-60",
                     className
                 )}
             >

@@ -4,16 +4,15 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import { Menu, X, Rocket, Download, Shield, Users, Info, Image, HelpCircle } from "lucide-react";
+import { Menu, X, Flame, Download, Shield, Send, Wrench, LayoutDashboard } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
-    { name: "Home", href: "/", icon: Rocket },
-    { name: "Features", href: "/features", icon: Shield },
-    { name: "Download", href: "/download", icon: Download },
-    { name: "Gallery", href: "/gallery", icon: Image },
-    { name: "Team", href: "/team", icon: Users },
-    { name: "About", href: "/about", icon: Info },
+    { name: "Downloads", href: "/download", icon: Download },
+    { name: "Devices", href: "/download#devices", icon: Shield },
+    { name: "Installation", href: "/installation", icon: Wrench },
+    { name: "Community", href: "/community", icon: Send },
+    { name: "Admin", href: "/admin", icon: LayoutDashboard },
 ];
 
 export function Navbar() {
@@ -30,76 +29,92 @@ export function Navbar() {
     return (
         <nav
             className={cn(
-                "fixed top-0 left-0 right-0 z-50 transition-all duration-500 px-6 py-4",
-                "bg-black/40 backdrop-blur-xl border-b border-white/5",
-                scrolled && "bg-black/60 border-white/10 py-3"
+                "fixed left-0 right-0 top-0 z-50 px-4 py-4 transition-all duration-500 sm:px-6",
+                scrolled ? "bg-black/70 backdrop-blur-2xl border-b border-white/10" : "bg-black/20 backdrop-blur-lg"
             )}
         >
-            <div className="max-w-7xl mx-auto flex items-center justify-between">
-                <Link href="/" className="flex items-center gap-2 group">
-                    <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-violet-600 rounded-xl flex items-center justify-center group-hover:rotate-12 transition-transform duration-300 shadow-lg shadow-blue-500/20">
-                        <Rocket className="text-white w-6 h-6" />
+            <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
+                <Link href="/" className="group flex min-w-0 items-center gap-3">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-red-400/25 bg-gradient-to-br from-red-700 to-zinc-950 shadow-lg shadow-red-600/20 transition-transform duration-300 group-hover:rotate-6">
+                        <Flame className="h-5 w-5 text-red-100" />
                     </div>
-                    <span className="text-xl font-bold tracking-tight text-white">Project<span className="text-blue-500">Move</span></span>
+                    <div className="min-w-0">
+                        <span className="block truncate text-lg font-black uppercase tracking-[0.16em] text-white sm:text-xl">
+                            DeadZone
+                        </span>
+                        <span className="hidden text-[10px] font-bold uppercase tracking-[0.28em] text-red-300/80 sm:block">
+                            Premium Android ROM
+                        </span>
+                    </div>
                 </Link>
 
-                {/* Desktop Nav */}
-                <div className="hidden md:flex items-center gap-1">
+                <div className="hidden items-center gap-1 lg:flex">
                     {navItems.map((item) => {
-                        const isActive = pathname === item.href;
+                        const baseHref = item.href.split("#")[0];
+                        const isActive = item.name === "Devices" ? pathname.startsWith("/download/") : pathname === baseHref;
                         return (
                             <Link
-                                key={item.href}
+                                key={`${item.name}-${item.href}`}
                                 href={item.href}
                                 className={cn(
-                                    "relative px-4 py-2 text-sm font-medium transition-colors rounded-lg flex items-center gap-2",
+                                    "relative flex items-center gap-2 rounded-2xl px-4 py-3 text-xs font-black uppercase tracking-[0.12em] transition-colors",
                                     isActive ? "text-white" : "text-zinc-400 hover:text-white"
                                 )}
                             >
                                 {isActive && (
                                     <motion.div
-                                        layoutId="nav-glow"
-                                        className="absolute inset-0 bg-blue-500/10 rounded-lg -z-10 border border-blue-500/20"
+                                        layoutId="deadzone-nav"
+                                        className="absolute inset-0 -z-10 rounded-2xl border border-red-400/25 bg-red-500/10"
                                         transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                                     />
                                 )}
-                                <item.icon className="w-4 h-4" />
+                                <item.icon className="h-4 w-4" />
                                 {item.name}
                             </Link>
                         );
                     })}
                 </div>
 
-                {/* Mobile Toggle */}
-                <button
-                    className="md:hidden p-2 text-zinc-400 hover:text-white transition-colors"
-                    onClick={() => setIsOpen(!isOpen)}
+                <Link
+                    href="/download"
+                    className="hidden min-h-11 items-center rounded-2xl bg-red-600 px-5 text-xs font-black uppercase tracking-[0.14em] text-white shadow-lg shadow-red-600/20 transition-all hover:bg-red-500 md:flex"
                 >
-                    {isOpen ? <X /> : <Menu />}
+                    Download
+                </Link>
+
+                <button
+                    className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] text-zinc-200 transition-colors hover:text-white lg:hidden"
+                    onClick={() => setIsOpen(!isOpen)}
+                    aria-label="Toggle navigation"
+                >
+                    {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
                 </button>
             </div>
 
-            {/* Mobile Nav */}
             {isOpen && (
                 <motion.div
-                    initial={{ opacity: 0, y: -20 }}
+                    initial={{ opacity: 0, y: -12 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="md:hidden absolute top-full left-0 right-0 bg-black/95 backdrop-blur-2xl mt-2 mx-4 rounded-2xl overflow-hidden p-3 flex flex-col gap-1 border border-white/10 shadow-2xl"
+                    className="absolute left-4 right-4 top-full mt-3 overflow-hidden rounded-[1.5rem] border border-white/10 bg-zinc-950/95 p-2 shadow-2xl shadow-black/60 backdrop-blur-2xl lg:hidden"
                 >
-                    {navItems.map((item) => (
-                        <Link
-                            key={item.href}
-                            href={item.href}
-                            onClick={() => setIsOpen(false)}
-                            className={cn(
-                                "px-4 py-3 text-sm font-medium rounded-xl flex items-center gap-3 transition-colors",
-                                pathname === item.href ? "bg-blue-500/10 text-white border border-blue-500/20" : "text-zinc-400 hover:bg-white/5 hover:text-white"
-                            )}
-                        >
-                            <item.icon className="w-5 h-5" />
-                            {item.name}
-                        </Link>
-                    ))}
+                    {navItems.map((item) => {
+                        const baseHref = item.href.split("#")[0];
+                        const isActive = item.name === "Devices" ? pathname.startsWith("/download/") : pathname === baseHref;
+                        return (
+                            <Link
+                                key={`${item.name}-${item.href}-mobile`}
+                                href={item.href}
+                                onClick={() => setIsOpen(false)}
+                                className={cn(
+                                    "flex min-h-12 items-center gap-3 rounded-2xl px-4 text-sm font-bold transition-colors",
+                                    isActive ? "bg-red-500/10 text-white" : "text-zinc-400 hover:bg-white/[0.05] hover:text-white"
+                                )}
+                            >
+                                <item.icon className="h-5 w-5" />
+                                {item.name}
+                            </Link>
+                        );
+                    })}
                 </motion.div>
             )}
         </nav>

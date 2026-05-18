@@ -4,128 +4,120 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Starfield } from "@/components/starfield";
 import { HeroSection } from "@/components/hero-section";
-import { motion, useSpring, useTransform, animate } from "framer-motion";
-import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { AlertTriangle, Cpu, Download, Gamepad2, Github, Shield, Sparkles, Trophy, Wrench } from "lucide-react";
+import { GlassCard, PlatformPill, RomBadge, SectionHeader } from "@/components/ui/deadzone";
 
-function Counter({ value }: { value: number }) {
-    const [display, setDisplay] = useState(0);
+const flavors = [
+    { name: "DeadZone Base", icon: Shield, desc: "Clean daily-driver builds with balanced performance, battery, and stability." },
+    { name: "DeadZone Gaming", icon: Gamepad2, desc: "Tuned for low latency, thermal awareness, and focused gaming sessions." },
+    { name: "DeadZone EPiC", icon: Sparkles, desc: "Feature-rich builds for users who want extra customization and polish." },
+    { name: "DeadZone Legend", icon: Trophy, desc: "Flagship-style release track for premium devices and showcase builds." },
+];
 
-    useEffect(() => {
-        const controls = animate(0, value, {
-            duration: 2,
-            ease: "easeOut",
-            onUpdate: (latest) => setDisplay(Math.floor(latest)),
-        });
-        return () => controls.stop();
-    }, [value]);
-
-    return <span>{display.toLocaleString()}</span>;
-}
-
-function StatsGrid() {
-    const [stats, setStats] = useState({ activeUsers: 52400, devices: 32 });
-
-    useEffect(() => {
-        fetch("/api/stats")
-            .then(res => res.json())
-            .then(data => {
-                if (data.activeUsers) setStats(data);
-            })
-            .catch(console.error);
-    }, []);
-
-    const items = [
-        { label: "Active Users", value: stats.activeUsers, suffix: "+" },
-        { label: "Devices", value: stats.devices, suffix: "+" },
-        { label: "Updates", value: "Weekly", isString: true },
-        { label: "Rating", value: "4.9", isString: true, suffix: "/5" },
-    ];
-
-    return (
-        <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                {items.map((stat, i) => (
-                    <motion.div
-                        key={i}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: i * 0.1 }}
-                        className="text-center"
-                    >
-                        <div className="text-4xl md:text-5xl font-black text-white mb-2 tracking-tighter">
-                            {stat.isString ? (
-                                <>{stat.value}{stat.suffix}</>
-                            ) : (
-                                <><Counter value={stat.value as number} />{stat.suffix}</>
-                            )}
-                        </div>
-                        <div className="text-zinc-600 text-[10px] font-black uppercase tracking-[0.2em]">{stat.label}</div>
-                    </motion.div>
-                ))}
-            </div>
-        </div>
-    );
-}
+const flow = [
+    { title: "GitHub Actions", desc: "Builds are tracked from CI so maintainers can link every release to its run.", icon: Github },
+    { title: "PixelDrain / GitHub Release", desc: "Downloads point to clear external release mirrors with optional checksums.", icon: Download },
+    { title: "Install", desc: "Flash type, platform notes, changelog, and warnings stay visible before download.", icon: Wrench },
+];
 
 export default function Home() {
     return (
         <main className="min-h-screen relative">
             <Starfield />
             <Navbar />
-
             <HeroSection />
 
-            {/* Stats Section */}
-            <section className="py-20 px-6">
-                <StatsGrid />
+            <section className="px-6 py-14">
+                <div className="mx-auto max-w-7xl">
+                    <SectionHeader
+                        eyebrow="ROM Flavors"
+                        title="Four tracks. One DeadZone identity."
+                        description="DeadZone can present different build flavors without splitting the site or admin workflow."
+                        align="center"
+                    />
+                    <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
+                        {flavors.map((flavor, index) => (
+                            <motion.div
+                                key={flavor.name}
+                                initial={{ opacity: 0, y: 18 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.06 }}
+                            >
+                                <GlassCard className="h-full p-6">
+                                    <div className="mb-7 flex h-14 w-14 items-center justify-center rounded-2xl border border-red-400/20 bg-red-500/10">
+                                        <flavor.icon className="h-7 w-7 text-red-200" />
+                                    </div>
+                                    <h3 className="text-xl font-black text-white">{flavor.name}</h3>
+                                    <p className="mt-3 text-sm leading-7 text-zinc-400">{flavor.desc}</p>
+                                </GlassCard>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
             </section>
 
-            {/* VIP Access Section */}
-            <section className="py-32 px-6">
-                <div className="max-w-5xl mx-auto rounded-[3.5rem] bg-gradient-to-br from-indigo-600 via-violet-700 to-fuchsia-700 p-1px relative overflow-hidden group shadow-2xl shadow-indigo-500/20">
-                    <div className="absolute inset-0 bg-zinc-950 rounded-[3.5rem] m-[2px]" />
+            <section className="px-6 py-14">
+                <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+                    <SectionHeader
+                        eyebrow="Supported Platforms"
+                        title="Built for modern Xiaomi-class Android devices."
+                        description="The foundation supports Snapdragon and MTK release metadata, plus HyperOS and MIUI-ready labeling for device pages."
+                    />
+                    <GlassCard className="p-6">
+                        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                            <PlatformPill><Cpu className="mr-2 h-4 w-4 text-red-300" /> Snapdragon</PlatformPill>
+                            <PlatformPill><Cpu className="mr-2 h-4 w-4 text-red-300" /> MTK</PlatformPill>
+                            <PlatformPill>HyperOS 3</PlatformPill>
+                            <PlatformPill>HyperOS 2</PlatformPill>
+                            <PlatformPill>HyperOS 1</PlatformPill>
+                            <PlatformPill>MIUI-ready foundation</PlatformPill>
+                        </div>
+                    </GlassCard>
+                </div>
+            </section>
 
-                    {/* Animated background elements */}
-                    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-500/10 blur-[120px] -mr-64 -mt-64 group-hover:bg-indigo-500/20 transition-colors duration-1000" />
-                    <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-fuchsia-500/10 blur-[100px] -ml-40 -mb-40 group-hover:bg-fuchsia-500/20 transition-colors duration-1000" />
-
-                    <div className="relative z-10 p-12 md:p-20 text-center">
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8 backdrop-blur-md"
-                        >
-                            <span className="w-2 h-2 bg-amber-400 rounded-full animate-ping" />
-                            <span className="text-xs font-black uppercase tracking-widest text-amber-400">Exclusive Access</span>
-                        </motion.div>
-
-                        <motion.h2
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            className="text-4xl md:text-6xl font-black mb-8 text-white tracking-tighter"
-                        >
-                            Unlock the <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-200">VIP Experience</span>
-                        </motion.h2>
-
-                        <p className="text-zinc-400 text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed">
-                            Get early access to private builds, exclusive features, and direct support from the developers. Join our elite circle.
-                        </p>
-
-                        <motion.a
-                            href="https://t.me/Msaeed9"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            className="inline-flex items-center gap-4 px-12 py-6 bg-gradient-to-r from-amber-400 to-amber-600 text-zinc-950 rounded-2xl font-black text-lg shadow-xl shadow-amber-500/20 hover:shadow-amber-500/40 transition-all uppercase tracking-tight"
-                        >
-                            Get VIP Access
-                            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
-                        </motion.a>
+            <section className="px-6 py-14">
+                <div className="mx-auto max-w-7xl">
+                    <SectionHeader
+                        eyebrow="Download Flow"
+                        title="A release path users can understand."
+                        description="Each ROM build can expose its CI run, mirror, checksum, stability state, and install method."
+                        align="center"
+                    />
+                    <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
+                        {flow.map((step, index) => (
+                            <GlassCard key={step.title} className="p-6">
+                                <div className="mb-6 flex items-center justify-between">
+                                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/[0.05]">
+                                        <step.icon className="h-6 w-6 text-red-300" />
+                                    </div>
+                                    <RomBadge>Step {index + 1}</RomBadge>
+                                </div>
+                                <h3 className="text-xl font-black text-white">{step.title}</h3>
+                                <p className="mt-3 text-sm leading-7 text-zinc-400">{step.desc}</p>
+                            </GlassCard>
+                        ))}
                     </div>
+                </div>
+            </section>
+
+            <section className="px-6 py-14 pb-24">
+                <div className="mx-auto max-w-5xl">
+                    <GlassCard className="p-6 md:p-8">
+                        <div className="flex flex-col gap-5 md:flex-row md:items-start">
+                            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-amber-400/25 bg-amber-500/10">
+                                <AlertTriangle className="h-7 w-7 text-amber-200" />
+                            </div>
+                            <div>
+                                <h2 className="text-2xl font-black text-white">Flash responsibly.</h2>
+                                <p className="mt-3 text-sm leading-7 text-zinc-300">
+                                    Installing custom ROMs can wipe data or damage a device when done incorrectly. Back up your files, unlock the bootloader, verify your build, and follow the install notes for your exact device.
+                                </p>
+                            </div>
+                        </div>
+                    </GlassCard>
                 </div>
             </section>
 

@@ -4,13 +4,20 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Starfield } from "@/components/starfield";
 import { motion } from "framer-motion";
-import { Search, Monitor, Cpu, Download as DownloadIcon, ChevronLeft } from "lucide-react";
+import { Search, Monitor, Cpu, Download as DownloadIcon, ChevronRight, Layers } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { GlassCard, RomBadge, SectionHeader, StatusBadge } from "@/components/ui/deadzone";
+
+function platformLabel(device: any) {
+    const text = `${device.platform || ""} ${device.chipset || ""}`.toLowerCase();
+    if (text.includes("snapdragon") || text.includes("qualcomm")) return "Snapdragon";
+    if (text.includes("mtk") || text.includes("mediatek") || text.includes("dimensity") || text.includes("helio")) return "MTK";
+    return "Android";
+}
 
 export default function DownloadPage() {
-
     const [search, setSearch] = useState("");
     const [activeBrand, setActiveBrand] = useState("All");
     const [devices, setDevices] = useState<any[]>([]);
@@ -33,11 +40,12 @@ export default function DownloadPage() {
         fetchDevices();
     }, []);
 
-    const brands = ["All", ...Array.from(new Set(devices.map((d) => d.brand)))];
+    const brands = ["All", ...Array.from(new Set(devices.map((d) => d.brand).filter(Boolean)))];
 
     const filteredDevices = devices.filter((d) => {
         const matchesSearch = d.name.toLowerCase().includes(search.toLowerCase()) ||
-            d.codename.toLowerCase().includes(search.toLowerCase());
+            d.codename.toLowerCase().includes(search.toLowerCase()) ||
+            d.chipset?.toLowerCase().includes(search.toLowerCase());
         const matchesBrand = activeBrand === "All" || d.brand === activeBrand;
         return matchesSearch && matchesBrand;
     });
@@ -47,119 +55,97 @@ export default function DownloadPage() {
             <Starfield />
             <Navbar />
 
-            <section className="pt-40 pb-20 px-6">
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-16">
-                        <motion.h1
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            className="text-5xl md:text-7xl font-bold mb-8 font-display"
-                        >
-                            Get <span className="text-blue-500">DeadZone</span>
-                        </motion.h1>
-                        <motion.p
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.1 }}
-                            className="text-zinc-500 text-lg max-w-2xl mx-auto mb-16"
-                        >
-                            Select your device to begin the download process.
-                        </motion.p>
+            <section id="devices" className="px-6 pb-20 pt-36">
+                <div className="mx-auto max-w-7xl">
+                    <SectionHeader
+                        eyebrow="Download Center"
+                        title={<>Find the right <span className="text-gradient">DeadZone</span> build.</>}
+                        description="Search supported hardware, review platform details, and open the device page for ROM flavor, stability, mirrors, and checksums."
+                        align="center"
+                    />
 
-                        <div className="flex flex-col md:flex-row items-center justify-center gap-6 max-w-4xl mx-auto mb-16">
-                            <div className="flex-1 relative group w-full">
-                                <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-600 group-focus-within:text-blue-500 transition-colors" />
-                                <input
-                                    type="text"
-                                    placeholder="Search devices..."
-                                    value={search}
-                                    onChange={(e) => setSearch(e.target.value)}
-                                    className="w-full pl-14 pr-6 py-5 bg-white/5 border border-white/10 rounded-2xl text-white placeholder-zinc-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50 backdrop-blur-xl transition-all"
-                                />
-                            </div>
-                            <div className="flex items-center gap-2 overflow-x-auto pb-2 custom-scrollbar w-full md:w-auto">
-                                {brands.map((brand) => (
-                                    <button
-                                        key={brand}
-                                        onClick={() => setActiveBrand(brand)}
-                                        className={cn(
-                                            "px-6 py-4 rounded-xl font-bold text-xs uppercase tracking-widest transition-all shrink-0 whitespace-nowrap",
-                                            activeBrand === brand
-                                                ? "bg-blue-600 text-white shadow-lg shadow-blue-600/20"
-                                                : "bg-white/5 text-zinc-500 hover:text-white hover:bg-white/10 border border-white/5"
-                                        )}
-                                    >
-                                        {brand}
-                                    </button>
-                                ))}
-                            </div>
+                    <div className="mx-auto mb-12 grid max-w-5xl gap-4 md:grid-cols-[1fr_auto]">
+                        <div className="group relative w-full">
+                            <Search className="absolute left-5 top-1/2 h-5 w-5 -translate-y-1/2 text-zinc-600 transition-colors group-focus-within:text-red-300" />
+                            <input
+                                type="text"
+                                placeholder="Search device, codename, or chipset..."
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                                className="min-h-14 w-full rounded-2xl border border-white/10 bg-white/[0.05] py-4 pl-14 pr-5 text-white outline-none backdrop-blur-xl transition-all placeholder:text-zinc-600 focus:border-red-400/40 focus:ring-2 focus:ring-red-500/20"
+                            />
+                        </div>
+                        <div className="flex gap-2 overflow-x-auto pb-2 custom-scrollbar">
+                            {brands.map((brand) => (
+                                <button
+                                    key={brand}
+                                    onClick={() => setActiveBrand(brand)}
+                                    className={cn(
+                                        "min-h-14 shrink-0 rounded-2xl px-5 text-xs font-black uppercase tracking-[0.16em] transition-all",
+                                        activeBrand === brand
+                                            ? "bg-red-600 text-white shadow-lg shadow-red-600/20"
+                                            : "border border-white/10 bg-white/[0.04] text-zinc-400 hover:text-white"
+                                    )}
+                                >
+                                    {brand}
+                                </button>
+                            ))}
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
                         {loading ? (
                             Array.from({ length: 6 }).map((_, i) => (
-                                <div key={i} className="h-[400px] rounded-[2.5rem] glass border border-white/5 p-10 flex flex-col justify-between overflow-hidden relative">
-                                    <div className="absolute top-0 right-0 w-32 h-32 bg-white/[0.02] rounded-full -mr-16 -mt-16" />
-                                    <div>
-                                        <div className="flex justify-between items-start mb-10">
-                                            <div className="w-16 h-16 bg-white/5 rounded-2xl animate-pulse" />
-                                            <div className="w-20 h-6 bg-white/5 rounded-lg animate-pulse" />
-                                        </div>
-                                        <div className="w-3/4 h-8 bg-white/5 rounded-xl animate-pulse mb-4" />
-                                        <div className="w-1/2 h-4 bg-white/5 rounded-lg animate-pulse" />
-                                    </div>
-                                    <div className="w-full h-14 bg-white/5 rounded-2xl animate-pulse" />
-                                </div>
+                                <GlassCard key={i} className="h-[360px] animate-pulse p-8" />
                             ))
                         ) : (
                             filteredDevices.map((device, i) => (
                                 <motion.div
                                     key={device.id}
-                                    initial={{ opacity: 0, y: 20 }}
+                                    initial={{ opacity: 0, y: 18 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: i * 0.05 }}
+                                    transition={{ delay: i * 0.04 }}
                                     layout
-                                    className="relative group"
                                 >
-                                    <Link href={`/download/${device.codename}`} className="block h-full">
-                                        <div className="h-full rounded-[2.5rem] glass group-hover:bg-white/[0.03] transition-all duration-500 overflow-hidden relative border border-white/10 group-hover:border-blue-500/50 group-hover:shadow-2xl group-hover:shadow-blue-500/10">
-                                            {/* Premium Glare Effect */}
-                                            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.02] to-white/[0.05] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-
-                                            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/5 blur-[40px] -mr-16 -mt-16 rounded-full group-hover:bg-blue-600/20 transition-all duration-700" />
-
-                                            <div className="p-10 relative z-10">
-                                                <div className="flex items-start justify-between mb-10">
-                                                    <div className="w-16 h-16 bg-blue-500/10 rounded-[1.5rem] flex items-center justify-center group-hover:scale-110 group-hover:bg-blue-500/20 transition-all duration-500">
-                                                        <Monitor className="text-blue-500 w-8 h-8" />
-                                                    </div>
-                                                    <div className="flex flex-col items-end">
-                                                        <span className="px-3 py-1 bg-white/5 text-zinc-400 rounded-lg text-[10px] font-bold uppercase tracking-widest border border-white/5 group-hover:border-blue-500/30 group-hover:text-blue-400 transition-colors">
-                                                            {device.brand}
-                                                        </span>
-                                                        <span className="text-[10px] text-zinc-600 mt-2 font-mono uppercase tracking-tighter group-hover:text-zinc-400 transition-colors">{device.codename}</span>
-                                                    </div>
+                                    <Link href={`/download/${device.codename}`} className="group block h-full">
+                                        <GlassCard className="h-full p-6 transition-all duration-500 group-hover:border-red-400/30 group-hover:shadow-red-950/30">
+                                            <div className="mb-8 flex items-start justify-between gap-4">
+                                                <div className="flex h-16 w-16 items-center justify-center rounded-[1.35rem] border border-red-400/20 bg-red-500/10 transition-transform group-hover:scale-105">
+                                                    <Monitor className="h-8 w-8 text-red-200" />
                                                 </div>
-
-                                                <h3 className="text-3xl font-bold text-white mb-4 tracking-tight group-hover:text-blue-400 transition-all duration-500">{device.name}</h3>
-
-                                                <div className="space-y-3 mb-10 text-zinc-500 group-hover:text-zinc-300 transition-colors">
-                                                    <div className="flex items-center gap-2 text-sm">
-                                                        <Cpu className="w-4 h-4 text-zinc-600 group-hover:text-blue-500/50 transition-colors" />
-                                                        {device.chipset}
-                                                    </div>
-                                                    <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider">
-                                                        <DownloadIcon className="w-3.5 h-3.5 text-zinc-600 group-hover:text-blue-500/50 transition-colors" />
-                                                        {device.romCount || 0} Builds Available
-                                                    </div>
-                                                </div>
-
-                                                <div className="w-full py-5 bg-blue-600/10 group-hover:bg-blue-600 text-blue-500 group-hover:text-white rounded-2xl font-bold transition-all duration-500 flex items-center justify-center gap-3 border border-blue-500/20 group-hover:border-transparent group-hover:shadow-lg group-hover:shadow-blue-600/30">
-                                                    View Details <ChevronLeft className="w-5 h-5 group-hover:translate-x-1 rotate-180 transition-transform" />
+                                                <div className="flex flex-col items-end gap-2">
+                                                    <RomBadge>{device.brand || "Device"}</RomBadge>
+                                                    <StatusBadge stable={device.status !== "INACTIVE"} />
                                                 </div>
                                             </div>
-                                        </div>
+
+                                            <h3 className="text-2xl font-black tracking-tight text-white transition-colors group-hover:text-red-100">{device.name}</h3>
+                                            <p className="mt-2 font-mono text-xs uppercase tracking-[0.24em] text-zinc-500">{device.codename}</p>
+
+                                            <div className="mt-7 space-y-3">
+                                                <div className="flex items-start gap-3 rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+                                                    <Cpu className="mt-0.5 h-5 w-5 shrink-0 text-red-300" />
+                                                    <div>
+                                                        <p className="text-[10px] font-black uppercase tracking-[0.18em] text-zinc-500">Chipset</p>
+                                                        <p className="mt-1 text-sm font-bold text-zinc-200">{device.chipset || "Unknown chipset"}</p>
+                                                    </div>
+                                                </div>
+                                                <div className="grid grid-cols-2 gap-3">
+                                                    <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+                                                        <p className="text-[10px] font-black uppercase tracking-[0.18em] text-zinc-500">Platform</p>
+                                                        <p className="mt-1 text-sm font-bold text-white">{platformLabel(device)}</p>
+                                                    </div>
+                                                    <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+                                                        <p className="text-[10px] font-black uppercase tracking-[0.18em] text-zinc-500">Builds</p>
+                                                        <p className="mt-1 text-sm font-bold text-white">{device.romCount || 0}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="mt-7 flex min-h-[3.25rem] items-center justify-center gap-3 rounded-2xl bg-red-600/10 px-5 py-4 text-sm font-black uppercase tracking-[0.14em] text-red-100 transition-all group-hover:bg-red-600 group-hover:text-white">
+                                                View ROMs <ChevronRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                                            </div>
+                                        </GlassCard>
                                     </Link>
                                 </motion.div>
                             ))
@@ -167,19 +153,13 @@ export default function DownloadPage() {
                     </div>
 
                     {!loading && filteredDevices.length === 0 && (
-                        <div className="text-center py-32 rounded-[3rem] border border-white/5 glass">
-                            <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-6">
-                                <Search className="w-8 h-8 text-zinc-600" />
+                        <GlassCard className="mt-8 p-10 text-center">
+                            <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/[0.05]">
+                                <Layers className="h-7 w-7 text-zinc-500" />
                             </div>
-                            <h3 className="text-xl font-bold text-white mb-2">No device matches found</h3>
-                            <p className="text-zinc-500 mb-8">We couldn't find any devices matching "{search}" in {activeBrand}.</p>
-                            <button
-                                onClick={() => { setSearch(""); setActiveBrand("All"); }}
-                                className="px-8 py-3 bg-white/5 hover:bg-white/10 text-white rounded-xl font-bold transition-all"
-                            >
-                                Reset Search Parameters
-                            </button>
-                        </div>
+                            <h3 className="text-xl font-black text-white">No supported device found</h3>
+                            <p className="mt-2 text-sm text-zinc-500">Try a different device name, codename, brand, or chipset.</p>
+                        </GlassCard>
                     )}
                 </div>
             </section>

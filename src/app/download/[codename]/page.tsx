@@ -14,12 +14,33 @@ import {
     Cpu,
     Smartphone,
     Layout,
-    Loader2
+    Github,
+    Link as LinkIcon,
+    Fingerprint,
+    Wrench,
+    AlertTriangle,
 } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { PremiumButton } from "@/components/ui/premium-button";
+import { GlassCard, RomBadge, StatusBadge } from "@/components/ui/deadzone";
+
+function platformLabel(device: any, rom?: any) {
+    const text = `${rom?.platform || ""} ${rom?.soc || ""} ${device?.chipset || ""}`.toLowerCase();
+    if (text.includes("snapdragon") || text.includes("qualcomm")) return "Snapdragon";
+    if (text.includes("mtk") || text.includes("mediatek") || text.includes("dimensity") || text.includes("helio")) return "MTK";
+    return rom?.platform || "Android";
+}
+
+function InfoRow({ label, value }: { label: string; value?: React.ReactNode }) {
+    return (
+        <div className="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+            <span className="text-[10px] font-black uppercase tracking-[0.18em] text-zinc-500">{label}</span>
+            <span className="break-all text-right text-sm font-bold text-white">{value || "Not set"}</span>
+        </div>
+    );
+}
 
 export default function DeviceDetailPage({ params }: { params: { codename: string } }) {
     const [device, setDevice] = useState<any>(null);
@@ -47,22 +68,33 @@ export default function DeviceDetailPage({ params }: { params: { codename: strin
         fetchDevice();
     }, [params.codename]);
 
+    const handleDownload = async () => {
+        if (!selectedRom) return;
+        setIsDownloading(true);
+        try {
+            await fetch("/api/downloads", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ romId: selectedRom.id }),
+            });
+        } catch (err) {
+            console.error("Tracking failed", err);
+        } finally {
+            setIsDownloading(false);
+        }
+        window.open(selectedRom.pixeldrainUrl || selectedRom.downloadUrl, "_blank");
+    };
+
     if (loading) {
         return (
             <main className="min-h-screen relative">
                 <Starfield />
                 <Navbar />
-                <div className="pt-32 pb-20 px-6 max-w-7xl mx-auto relative z-10">
-                    <div className="h-8 w-48 bg-white/5 rounded-xl animate-pulse mb-12" />
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-                        <div className="lg:col-span-1 space-y-8">
-                            <div className="h-[400px] rounded-[2.5rem] bg-white/5 animate-pulse border border-white/5" />
-                            <div className="h-[120px] rounded-[2rem] bg-white/5 animate-pulse border border-white/5" />
-                        </div>
-                        <div className="lg:col-span-2 space-y-8">
-                            <div className="h-16 w-full bg-white/5 rounded-2xl animate-pulse" />
-                            <div className="h-[600px] rounded-[3rem] bg-white/5 animate-pulse border border-white/5" />
-                        </div>
+                <div className="mx-auto max-w-7xl px-6 pb-20 pt-32">
+                    <div className="h-8 w-48 animate-pulse rounded-xl bg-white/5 mb-12" />
+                    <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+                        <div className="h-[420px] animate-pulse rounded-[2rem] bg-white/5 lg:col-span-1" />
+                        <div className="h-[620px] animate-pulse rounded-[2rem] bg-white/5 lg:col-span-2" />
                     </div>
                 </div>
             </main>
@@ -71,11 +103,11 @@ export default function DeviceDetailPage({ params }: { params: { codename: strin
 
     if (!device) {
         return (
-            <main className="min-h-screen relative flex flex-col items-center justify-center px-6">
+            <main className="min-h-screen relative flex flex-col items-center justify-center px-6 text-center">
                 <Starfield />
-                <h1 className="text-4xl font-bold text-white mb-4">Device Not Found</h1>
-                <p className="text-zinc-500 mb-8">The requested device could not be located in our database.</p>
-                <Link href="/download" className="px-8 py-4 bg-blue-600 text-white rounded-2xl font-bold">
+                <h1 className="mb-4 text-4xl font-black text-white">Device Not Found</h1>
+                <p className="mb-8 text-zinc-500">The requested device could not be located in the DeadZone database.</p>
+                <Link href="/download" className="rounded-2xl bg-red-600 px-8 py-4 font-bold text-white">
                     Back to Download Center
                 </Link>
             </main>
@@ -87,77 +119,58 @@ export default function DeviceDetailPage({ params }: { params: { codename: strin
             <Starfield />
             <Navbar />
 
-            <div className="pt-32 pb-20 px-6 max-w-7xl mx-auto relative z-10">
-                <Link
-                    href="/download"
-                    className="flex items-center gap-2 text-zinc-500 hover:text-white transition-colors mb-12 group w-fit"
-                >
-                    <ChevronLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-                    <span className="text-sm font-bold uppercase tracking-widest">Back to Downloads</span>
+            <div className="mx-auto max-w-7xl px-6 pb-20 pt-32">
+                <Link href="/download" className="mb-10 flex w-fit items-center gap-2 text-zinc-500 transition-colors hover:text-white">
+                    <ChevronLeft className="h-5 w-5" />
+                    <span className="text-sm font-black uppercase tracking-[0.16em]">Back to Downloads</span>
                 </Link>
 
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-                    {/* Device Header & Stats */}
-                    <div className="lg:col-span-1 space-y-8">
-                        <motion.div
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            className="p-10 rounded-[2.5rem] glass border border-white/10 relative overflow-hidden"
-                        >
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/10 blur-[60px] -mr-16 -mt-16 rounded-full" />
-
-                            <div className="w-20 h-20 bg-blue-500/10 rounded-3xl flex items-center justify-center mb-8">
-                                <Smartphone className="text-blue-500 w-10 h-10" />
-                            </div>
-
-                            <h1 className="text-4xl font-bold text-white mb-2 leading-tight">{device.name}</h1>
-                            <p className="text-zinc-500 font-mono text-sm uppercase tracking-[0.2em] mb-8">{device.codename}</p>
-
-                            <div className="space-y-4">
-                                <div className="flex items-center gap-4 p-4 bg-white/5 rounded-2xl border border-white/5">
-                                    <Cpu className="w-5 h-5 text-zinc-500" />
-                                    <div>
-                                        <p className="text-[10px] text-zinc-600 font-bold uppercase tracking-wider">Chipset</p>
-                                        <p className="text-sm text-zinc-300 font-medium">{device.chipset}</p>
-                                    </div>
+                <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+                    <div className="space-y-6 lg:col-span-1">
+                        <motion.div initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }}>
+                            <GlassCard className="p-7">
+                                <div className="mb-7 flex h-20 w-20 items-center justify-center rounded-[1.75rem] border border-red-400/20 bg-red-500/10">
+                                    <Smartphone className="h-10 w-10 text-red-200" />
                                 </div>
-                                <div className="flex items-center gap-4 p-4 bg-white/5 rounded-2xl border border-white/5">
-                                    <Layout className="w-5 h-5 text-zinc-500" />
-                                    <div>
-                                        <p className="text-[10px] text-zinc-600 font-bold uppercase tracking-wider">Brand</p>
-                                        <p className="text-sm text-zinc-300 font-medium">{device.brand}</p>
-                                    </div>
+                                <h1 className="text-4xl font-black leading-tight text-white">{device.name}</h1>
+                                <p className="mt-2 font-mono text-xs uppercase tracking-[0.24em] text-zinc-500">{device.codename}</p>
+
+                                <div className="mt-8 space-y-3">
+                                    <InfoRow label="Brand" value={device.brand} />
+                                    <InfoRow label="Chipset" value={device.chipset} />
+                                    <InfoRow label="Platform" value={platformLabel(device, selectedRom)} />
+                                    <InfoRow label="Builds" value={device.roms.length} />
                                 </div>
-                            </div>
+                            </GlassCard>
                         </motion.div>
 
-                        <div className="p-8 rounded-[2rem] glass border border-white/10 bg-emerald-500/5">
-                            <h3 className="text-white font-bold mb-4 flex items-center gap-2">
-                                <ShieldCheck className="w-5 h-5 text-emerald-500" /> System Integrity
+                        <GlassCard className="p-6">
+                            <h3 className="mb-3 flex items-center gap-2 font-black text-white">
+                                <ShieldCheck className="h-5 w-5 text-emerald-300" /> Device Support
                             </h3>
-                            <p className="text-zinc-400 text-sm leading-relaxed">
-                                This device is officially supported by DeadZone Team. All builds are verified and passed internal stability tests.
+                            <p className="text-sm leading-7 text-zinc-400">
+                                This page shows DeadZone releases registered for this exact codename. Confirm the codename before flashing.
                             </p>
-                        </div>
+                        </GlassCard>
                     </div>
 
-                    {/* ROM Selection & Details */}
-                    <div className="lg:col-span-2 space-y-8">
+                    <div className="space-y-7 lg:col-span-2">
                         {device.roms.length > 0 ? (
                             <>
-                                <div className="flex flex-wrap gap-4 mb-8">
+                                <div className="flex gap-3 overflow-x-auto pb-2 custom-scrollbar">
                                     {device.roms.map((rom: any) => (
                                         <button
                                             key={rom.id}
                                             onClick={() => setSelectedRom(rom)}
                                             className={cn(
-                                                "px-6 py-4 rounded-2xl font-bold text-xs uppercase tracking-widest transition-all border",
+                                                "min-h-14 shrink-0 rounded-2xl border px-5 text-left transition-all",
                                                 selectedRom?.id === rom.id
-                                                    ? "bg-blue-600 border-blue-500 text-white shadow-lg shadow-blue-600/20"
-                                                    : "bg-white/5 border-white/10 text-zinc-500 hover:text-white hover:border-white/20"
+                                                    ? "border-red-400/40 bg-red-500/15 text-white"
+                                                    : "border-white/10 bg-white/[0.04] text-zinc-400 hover:text-white"
                                             )}
                                         >
-                                            v{rom.version}
+                                            <span className="block text-xs font-black uppercase tracking-[0.16em]">{rom.flavor || "DeadZone"}</span>
+                                            <span className="mt-1 block text-sm font-bold">v{rom.version}</span>
                                         </button>
                                     ))}
                                 </div>
@@ -169,101 +182,109 @@ export default function DeviceDetailPage({ params }: { params: { codename: strin
                                             initial={{ opacity: 0, y: 10 }}
                                             animate={{ opacity: 1, y: 0 }}
                                             exit={{ opacity: 0, y: -10 }}
-                                            className="space-y-8"
+                                            className="space-y-7"
                                         >
-                                            <div className="p-10 rounded-[3rem] glass border border-white/10 relative overflow-hidden">
-                                                <div className="flex flex-wrap items-center justify-between gap-6 mb-10">
+                                            <GlassCard className="p-6 md:p-8">
+                                                <div className="mb-8 flex flex-col gap-6 xl:flex-row xl:items-start xl:justify-between">
                                                     <div>
-                                                        <h2 className="text-3xl font-bold text-white mb-2">DeadZone v{selectedRom.version}</h2>
-                                                        <p className="text-zinc-500 text-sm">Released on {new Date(selectedRom.releaseDate).toLocaleDateString()}</p>
+                                                        <div className="mb-4 flex flex-wrap gap-2">
+                                                            <RomBadge>{selectedRom.flavor ? `DeadZone ${selectedRom.flavor}` : "DeadZone ROM"}</RomBadge>
+                                                            <StatusBadge stable={selectedRom.isStable} test={selectedRom.isTestBuild} />
+                                                            {selectedRom.flashType && <RomBadge className="border-white/10 bg-white/[0.04] text-zinc-200">{selectedRom.flashType}</RomBadge>}
+                                                        </div>
+                                                        <h2 className="text-3xl font-black text-white md:text-5xl">DeadZone v{selectedRom.version}</h2>
+                                                        <p className="mt-3 text-sm text-zinc-500">Released {new Date(selectedRom.releaseDate).toLocaleDateString()}</p>
                                                     </div>
-                                                    <PremiumButton
-                                                        onClick={async () => {
-                                                            setIsDownloading(true);
-                                                            try {
-                                                                await fetch("/api/downloads", {
-                                                                    method: "POST",
-                                                                    headers: { "Content-Type": "application/json" },
-                                                                    body: JSON.stringify({ romId: selectedRom.id }),
-                                                                });
-                                                            } catch (err) {
-                                                                console.error("Tracking failed", err);
-                                                            } finally {
-                                                                setIsDownloading(false);
-                                                            }
-                                                            window.open(selectedRom.downloadUrl, "_blank");
-                                                        }}
-                                                        loading={isDownloading}
-                                                        className="px-10 py-5 rounded-[2rem] text-sm"
-                                                        icon={<Download className="w-5 h-5 group-hover:translate-y-1 transition-transform" />}
-                                                    >
+                                                    <PremiumButton onClick={handleDownload} loading={isDownloading} icon={<Download className="h-5 w-5" />}>
                                                         Download Build
                                                     </PremiumButton>
                                                 </div>
 
-                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                                    <div className="space-y-6">
-                                                        <h4 className="text-white font-bold flex items-center gap-2">
-                                                            <History className="w-5 h-5 text-blue-500" /> Changelog
+                                                <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
+                                                    <div>
+                                                        <h4 className="mb-4 flex items-center gap-2 font-black text-white">
+                                                            <History className="h-5 w-5 text-red-300" /> Changelog
                                                         </h4>
-                                                        <div className="p-6 bg-white/[0.03] rounded-3xl border border-white/5 text-zinc-400 text-sm leading-relaxed whitespace-pre-line font-medium italic">
+                                                        <div className="min-h-[220px] rounded-3xl border border-white/10 bg-white/[0.04] p-5 text-sm leading-7 text-zinc-300 whitespace-pre-line">
                                                             {selectedRom.changelog || "No changelog provided for this release."}
                                                         </div>
                                                     </div>
-                                                    <div className="space-y-6">
-                                                        <h4 className="text-white font-bold flex items-center gap-2">
-                                                            <Terminal className="w-5 h-5 text-blue-500" /> Build Information
+                                                    <div>
+                                                        <h4 className="mb-4 flex items-center gap-2 font-black text-white">
+                                                            <Terminal className="h-5 w-5 text-red-300" /> Build Information
                                                         </h4>
-                                                        <div className="grid grid-cols-1 gap-4">
-                                                            <div className="p-4 bg-white/[0.03] rounded-2xl border border-white/5 flex justify-between items-center">
-                                                                <span className="text-zinc-500 text-xs font-bold uppercase tracking-wider">Android Version</span>
-                                                                <span className="text-white font-bold">{selectedRom.androidVersion}</span>
-                                                            </div>
-                                                            <div className="p-4 bg-white/[0.03] rounded-2xl border border-white/5 flex justify-between items-center">
-                                                                <span className="text-zinc-500 text-xs font-bold uppercase tracking-wider">File Size</span>
-                                                                <span className="text-white font-bold">{selectedRom.fileSize || "1.8 GB"}</span>
-                                                            </div>
-                                                            <div className="p-4 bg-white/[0.03] rounded-2xl border border-white/5 flex justify-between items-center">
-                                                                <span className="text-zinc-500 text-xs font-bold uppercase tracking-wider">Build Type</span>
-                                                                <span className="text-emerald-500 font-bold uppercase tracking-widest text-[10px] bg-emerald-500/10 px-2 py-1 rounded-md">{selectedRom.type}</span>
-                                                            </div>
+                                                        <div className="space-y-3">
+                                                            <InfoRow label="Android" value={selectedRom.androidVersion} />
+                                                            <InfoRow label="Platform" value={selectedRom.platform || platformLabel(device, selectedRom)} />
+                                                            <InfoRow label="SoC" value={selectedRom.soc || device.chipset} />
+                                                            <InfoRow label="File size" value={selectedRom.fileSize} />
+                                                            <InfoRow label="Type" value={selectedRom.type} />
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </GlassCard>
 
-                                            {/* Installation Guide */}
-                                            <div className="p-10 rounded-[3rem] glass border border-white/10 bg-white/[0.01]">
-                                                <h3 className="text-2xl font-bold text-white mb-8 flex items-center gap-3">
-                                                    <Info className="w-6 h-6 text-blue-500" /> Installation Guide
+                                            <GlassCard className="p-6 md:p-8">
+                                                <h3 className="mb-6 flex items-center gap-3 text-2xl font-black text-white">
+                                                    <LinkIcon className="h-6 w-6 text-red-300" /> Release Links
                                                 </h3>
-                                                <div className="prose prose-invert max-w-none prose-zinc text-zinc-400 text-sm leading-relaxed whitespace-pre-line">
-                                                    {selectedRom.installationGuide || (
-                                                        `1. Backup all your important data.
-                                                        2. Ensure your bootloader is unlocked.
-                                                        3. Boot into your preferred custom recovery (TWRP/OrangeFox).
-                                                        4. Wipe Data, Cache, and Dalvik.
-                                                        5. Flash the DeadZone zip file.
-                                                        6. (Optional) Flash Magisk for root access.
-                                                        7. Reboot and enjoy the DeadZone experience.`
+                                                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                                                    <a href={selectedRom.pixeldrainUrl || selectedRom.downloadUrl} target="_blank" rel="noopener noreferrer" className="rounded-2xl border border-white/10 bg-white/[0.04] p-5 transition-colors hover:border-red-400/35">
+                                                        <Download className="mb-4 h-6 w-6 text-red-300" />
+                                                        <p className="text-xs font-black uppercase tracking-[0.18em] text-zinc-500">PixelDrain / Mirror</p>
+                                                        <p className="mt-2 break-all text-sm font-bold text-white">{selectedRom.pixeldrainUrl || selectedRom.downloadUrl}</p>
+                                                    </a>
+                                                    {selectedRom.githubRunUrl && (
+                                                        <a href={selectedRom.githubRunUrl} target="_blank" rel="noopener noreferrer" className="rounded-2xl border border-white/10 bg-white/[0.04] p-5 transition-colors hover:border-red-400/35">
+                                                            <Github className="mb-4 h-6 w-6 text-red-300" />
+                                                            <p className="text-xs font-black uppercase tracking-[0.18em] text-zinc-500">GitHub Run</p>
+                                                            <p className="mt-2 break-all text-sm font-bold text-white">{selectedRom.githubRunUrl}</p>
+                                                        </a>
                                                     )}
                                                 </div>
-                                            </div>
+                                                {selectedRom.sha256 && (
+                                                    <div className="mt-4 rounded-2xl border border-white/10 bg-black/35 p-5">
+                                                        <div className="mb-2 flex items-center gap-2 text-xs font-black uppercase tracking-[0.18em] text-zinc-500">
+                                                            <Fingerprint className="h-4 w-4 text-red-300" /> SHA-256
+                                                        </div>
+                                                        <p className="break-all font-mono text-xs leading-6 text-zinc-300">{selectedRom.sha256}</p>
+                                                    </div>
+                                                )}
+                                            </GlassCard>
+
+                                            <GlassCard className="p-6 md:p-8">
+                                                <h3 className="mb-6 flex items-center gap-3 text-2xl font-black text-white">
+                                                    <Info className="h-6 w-6 text-red-300" /> Installation Guide
+                                                </h3>
+                                                <div className="text-sm leading-8 text-zinc-300 whitespace-pre-line">
+                                                    {selectedRom.installationGuide || (
+                                                        `1. Back up all important data.
+2. Confirm this build matches ${device.name} (${device.codename}).
+3. Unlock the bootloader and boot into the required flashing environment.
+4. Flash the DeadZone package using the listed flash type.
+5. Verify boot, then restore data only after the first setup is complete.`
+                                                    )}
+                                                </div>
+                                                <div className="mt-6 flex gap-3 rounded-2xl border border-amber-400/20 bg-amber-500/10 p-4">
+                                                    <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-amber-200" />
+                                                    <p className="text-sm leading-6 text-amber-50/80">Flash at your own risk. Backup required. Unlocked bootloader required.</p>
+                                                </div>
+                                            </GlassCard>
                                         </motion.div>
                                     )}
                                 </AnimatePresence>
                             </>
                         ) : (
-                            <div className="p-20 rounded-[3rem] glass border border-white/10 text-center">
-                                <h3 className="text-xl font-bold text-white mb-2">No Builds Registered</h3>
-                                <p className="text-zinc-500">Official builds for this hardware cluster are coming soon.</p>
-                            </div>
+                            <GlassCard className="p-12 text-center">
+                                <h3 className="text-xl font-black text-white">No Builds Registered</h3>
+                                <p className="mt-2 text-zinc-500">Official builds for this hardware are coming soon.</p>
+                            </GlassCard>
                         )}
                     </div>
                 </div>
             </div>
 
             <Footer />
-        </main >
+        </main>
     );
 }
